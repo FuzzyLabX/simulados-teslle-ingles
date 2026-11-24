@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulado de leitura</title>
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#161d26" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<script src="tema.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="estilo.css">
+<style>
+.tabs{display:none}
+/* desktop: a página não rola; só as duas colunas, cada uma por conta própria */
+html,body{height:100%}
+body{display:flex;flex-direction:column;overflow:hidden}
+.top{flex:none}
+.split{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr)}
+.pane{min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-color:var(--line) transparent;min-width:0;padding:24px 16px 64px}
+.pane.text{border-right:1px solid var(--line)}
+.sheet{max-width:46rem;margin:0 auto;background:var(--paper);border:1px solid var(--line);padding:28px clamp(16px,4vw,40px) 36px}
+.note{font-size:12.5px;color:var(--muted);border:1px dashed var(--line);padding:8px 12px;margin-bottom:22px}
+.journal{font-size:12px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;margin:0 0 10px}
+.sheet h1{font-family:var(--serif);font-weight:400;font-size:clamp(28px,4vw,38px);line-height:1.12;margin:0 0 14px;text-wrap:balance}
+.authors{font-family:var(--serif);font-weight:700;font-size:18px;margin:0 0 18px;padding-bottom:14px;border-bottom:2px solid var(--ink)}
+.abstract{font-weight:600;font-size:14px;line-height:1.55;margin:0 0 12px}
+.kw{font-weight:600;font-size:13.5px;margin:0 0 22px}
+.sheet h2{font-weight:600;font-size:14px;letter-spacing:.06em;text-transform:uppercase;margin:28px 0 10px;text-wrap:balance}
+.sheet h3{font-weight:600;font-size:15px;margin:22px 0 8px}
+.para{display:grid;grid-template-columns:2.9rem minmax(0,1fr);gap:0 10px;margin:0 0 12px;scroll-margin-top:24px}
+.para .pn{font-family:var(--mono);font-size:11.5px;border:1px solid var(--ink);height:fit-content;text-align:center;padding:1px 0;margin-top:4px}
+.para p{margin:0;font-family:var(--serif);font-size:16.5px;line-height:1.62;hyphens:auto}
+.para.flash p{animation:flash 2.4s ease-out}
+@keyframes flash{0%,35%{background:var(--mark)}100%{background:transparent}}
+.tab{margin:18px 0 18px 3.6rem;font-family:var(--serif)}
+.tab figcaption{font-weight:600;font-size:15px;margin-bottom:6px;text-align:center}
+.tab-scroll{overflow-x:auto}
+.tab table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.tab th,.tab td{padding:4px 8px;text-align:right;border-bottom:1px solid var(--line)}
+.tab thead th{border-bottom:1px solid var(--ink);font-weight:600}
+.tab th[scope="row"],.tab thead th:first-child{text-align:left;font-weight:400}
+.tab-nota{font-size:12.5px;color:var(--muted);margin:4px 0 0}
+@media (max-width:999px){ .tab{margin-left:0} }
+.refs{margin-top:30px;border-top:1px solid var(--line);padding-top:14px}
+.refs ol{list-style:none;padding:0;margin:0;font-family:var(--serif);font-size:13.5px;line-height:1.45;display:grid;gap:5px}
+.refs li{padding-left:1.2em;text-indent:-1.2em}
+.foot{margin-top:18px;font-size:12px;color:var(--muted);font-style:italic;font-family:var(--serif)}
+
+.qwrap{max-width:40rem;margin:0 auto;display:grid;gap:18px}
+.intro{font-size:14px;color:var(--muted);margin:0}
+.intro i{color:var(--ink)}
+.banner{background:var(--warn-soft);color:var(--ink);border:1px solid var(--warn);padding:10px 14px;font-size:14px}
+.score{background:var(--paper);border:1px solid var(--line);padding:16px 18px;display:grid;gap:10px}
+.score .big{font-family:var(--serif);font-size:30px;line-height:1}
+.score .big small{font-family:var(--sans);font-size:14px;color:var(--muted)}
+.grid16{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px}
+.cell{font-family:var(--mono);font-size:12px;text-align:center;padding:5px 0;border:1px solid var(--line);border-radius:4px;text-decoration:none;color:var(--ink)}
+.cell.ok{background:var(--ok-soft);color:var(--ok);border-color:var(--ok)}
+.cell.no{background:var(--bad-soft);color:var(--bad);border-color:var(--bad)}
+.q{background:var(--paper);border:1px solid var(--line);padding:0 0 14px;scroll-margin-top:12px}
+.qhead{display:flex;align-items:center;gap:10px;background:var(--line);padding:0 12px 0 0;margin-bottom:12px}
+.qn{font-family:var(--mono);font-size:13px;background:var(--ink);color:var(--paper);padding:3px 9px}
+.qtag{font-size:12px;color:var(--muted)}
+.dif{margin-left:auto;font-size:12px;color:var(--muted);display:flex;gap:5px;align-items:center;cursor:pointer}
+.qbody{padding:0 16px;display:grid;gap:12px}
+.qp p{margin:0 0 8px}
+.qp .seg{font-family:var(--serif);font-size:15.5px}
+.assoc{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr);gap:8px 16px;font-size:14.5px;margin:4px 0 8px}
+.assoc ol{margin:0;padding-left:1.3em;display:grid;gap:6px}
+.assoc ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.items{list-style:none;margin:4px 0 8px;padding:0;display:grid;gap:8px;font-size:14.5px}
+.paren{font-family:var(--mono);white-space:nowrap;margin-right:6px;color:var(--muted)}
+.roman{display:grid;gap:8px;margin:4px 0 8px;font-size:14.5px}
+.opts{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.opts label{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start;padding:7px 8px;border-radius:6px;cursor:pointer;border:1px solid transparent}
+.opts label:hover{background:var(--accent-soft)}
+.opts input{position:absolute;top:0;left:0;width:1px;height:1px;opacity:0;pointer-events:none}
+.L{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;border:1.5px solid var(--ink);font-family:var(--mono);font-size:12px}
+.opts input:checked + .L{background:var(--ink);color:var(--paper)}
+.opts input:focus-visible + .L{outline:2px solid var(--accent);outline-offset:2px}
+.opts label.right{background:var(--ok-soft);border-color:var(--ok)}
+.opts label.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.graded .opts label{cursor:default}
+.graded .opts label:not(.right):not(.wrong):hover{background:transparent}
+.reportar{font-size:12.5px;margin:0}
+.reportar a{color:var(--muted)}
+.apoio-nota{margin:2px 0 0;font-size:13px;color:var(--muted)}
+.apoio-nota a{font-weight:500}
+.verdict{font-weight:600;font-size:14px;margin:0}
+.verdict.ok{color:var(--ok)} .verdict.no{color:var(--bad)}
+.exp{border-top:1px dashed var(--line);padding-top:10px;font-size:14.5px;display:grid;gap:8px}
+.exp p{margin:0}
+.tip{background:var(--accent-soft);padding:8px 10px;border-radius:6px}
+.pref{border:0;background:none;padding:0;font:inherit;color:var(--accent);text-decoration:underline dotted;text-underline-offset:3px}
+u{text-decoration-thickness:1.5px;text-underline-offset:2px}
+.endbar{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.err{max-width:40rem;margin:40px auto;padding:16px}
+@media (max-width:999px){
+  .tabs{display:flex;gap:6px;position:sticky;top:var(--hh);z-index:4;background:var(--bg);padding:8px 16px;border-bottom:1px solid var(--line)}
+  .tabs button{flex:1;border:1px solid var(--line);background:var(--paper);padding:8px;border-radius:6px;font-weight:500}
+  .tabs button[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  html,body{height:auto}
+  body{display:block;overflow:visible}
+  .split{display:block}
+  .pane{height:auto;overflow:visible;padding:16px 16px 48px}
+  .pane.text{border-right:0}
+  .para{scroll-margin-top:130px}
+  .q{scroll-margin-top:120px}
+  .assoc{grid-template-columns:1fr}
+  .grid16{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+.voltar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:6;border:0;border-radius:99px;padding:11px 18px;background:var(--ink);color:var(--paper);font-weight:600;font-size:14.5px;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+@media (max-width:640px){
+  .top{flex-wrap:nowrap;gap:8px;padding:8px 12px;min-height:52px}
+  .top .hide-sm,#hdrTitle{display:none}
+  .top .btn{padding:7px 12px}
+  .tabs{padding:6px 12px}
+  .tabs button{padding:9px 6px;font-size:14.5px}
+  .pane{padding:12px 12px 90px}
+  .sheet{padding:18px 14px 26px}
+  .sheet h1{font-size:26px}
+  .para{grid-template-columns:2.2rem minmax(0,1fr);gap:0 8px}
+  .para .pn{font-size:10.5px}
+  .para p{font-size:16px;line-height:1.6}
+  .pref{padding:2px 3px;margin:-2px -1px}
+  .qbody{padding:0 12px}
+  .opts label{padding:9px 8px}
+  .score{padding:14px}
+}
+@media (prefers-reduced-motion:reduce){.para.flash p{animation:none;background:var(--mark)}}
+</style>
+</head>
+<body>
+<noscript><p style="padding:16px">Este site precisa de JavaScript para mostrar o simulado e corrigir a prova.</p></noscript>
+<header class="top">
+  <a class="brand" href="./" title="Voltar ao painel"><span class="mark" aria-hidden="true">§</span><span id="hdrTitle">Simulado</span></a>
+  <div class="spacer"></div>
+  <span class="timer" id="timer" title="Tempo desde o início desta tentativa">00:00</span>
+  <span class="prog hide-sm" id="prog"></span>
+  <a class="btn hide-sm" href="./">Painel</a>
+  <button class="icon-btn" type="button" data-tema aria-label="Alternar tema"></button>
+  <button class="btn primary" id="gradeBtn" type="button">Corrigir</button>
+</header>
+<nav class="tabs" role="tablist">
+  <button type="button" role="tab" id="tabText" aria-selected="true">Texto</button>
+  <button type="button" role="tab" id="tabQ" aria-selected="false">Questões</button>
+</nav>
+<button type="button" class="voltar" id="voltarQ" hidden></button>
+<main class="split" id="main">
+  <section class="pane text" id="paneText" aria-label="Texto"><div class="sheet" id="sheet"></div></section>
+  <section class="pane qs" id="paneQ" aria-label="Questões">
+    <div class="qwrap">
+      <div class="banner" id="banner" hidden></div>
+      <p class="intro" id="intro"></p>
+      <div class="score" id="score" hidden></div>
+      <div id="qlist" class="qwrap"></div>
+      <div class="endbar">
+        <button class="btn" id="newBtn" type="button">Nova tentativa</button>
+        <button class="btn primary" id="gradeBtn2" type="button">Corrigir prova</button>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+const L = ['a','b','c','d','e'];
+const SID = new URLSearchParams(location.search).get('id') || '';
+const VER = new URLSearchParams(location.search).get('ver');
+const KEY = 'rascunho-' + SID;
+// st.decorrido = segundos de tempo ATIVO (página aberta e visível). Não usamos “agora − início”:
+// um rascunho aberto num dia e retomado dias depois inflava o tempo.
+let S, TIPOS, st = {respostas:{}, dificeis:[], decorrido:0}, graded = false, timerId, ultimoTick = Date.now();
+const $ = id => document.getElementById(id);
+const PAUSA_MAX = 5000;   // intervalo maior que isso entre dois ticks (hibernação, aba congelada) não conta
+
+function load(){
+  try{
+    const d = JSON.parse(localStorage.getItem(KEY));
+    if (d && d.respostas){
+      // rascunho antigo (só tinha “inicio”): o tempo real é desconhecido, recomeça do zero
+      st = {respostas:d.respostas, dificeis:d.dificeis||[], decorrido: typeof d.decorrido === 'number' ? d.decorrido : 0};
+    }
+  }catch(e){}
+}
+function save(){ if(VER) return; try{ localStorage.setItem(KEY, JSON.stringify(st)); }catch(e){} }
+function linkRefs(h){ return h.replace(/§\s?(\d+)/g, (m,n)=>`<button type="button" class="pref" data-p="${n}">§${n}</button>`); }
+function fmt(s){ const m = Math.floor(s/60), h = Math.floor(m/60); return (h? h+':' : '') + String(m%60).padStart(2,'0') + ':' + String(s%60).padStart(2,'0'); }
+
+function renderText(){
+  const t = S.texto, f = S.fonte || {};
+  let h = '';
+  if (t.nota) h += `<div class="note">${t.nota}</div>`;
+  if (t.periodico) h += `<p class="journal">${t.periodico}</p>`;
+  h += `<h1>${t.titulo || S.titulo}</h1>`;
+  if (t.autores) h += `<p class="authors">${t.autores}</p>`;
+  if (t.abstract) h += `<p class="abstract">${t.abstract}</p>`;
+  if (t.keywords) h += `<p class="kw">Keywords: ${t.keywords}</p>`;
+  let n = 0;
+  for (const b of t.blocos){
+    if (b.h2) h += `<h2>${b.h2}</h2>`;
+    else if (b.h3) h += `<h3>${b.h3}</h3>`;
+    else if (b.p){ n++; h += `<div class="para" id="p${n}"><span class="pn">§ ${n}</span><p>${b.p}</p></div>`; }
+    else if (b.tabela){ const tb = b.tabela;
+      h += `<figure class="tab">${tb.titulo ? `<figcaption>${tb.titulo}</figcaption>` : ''}<div class="tab-scroll"><table>
+        <thead><tr>${tb.cabecalho.map(c=>`<th>${c}</th>`).join('')}</tr></thead>
+        <tbody>${tb.linhas.map(l=>`<tr>${l.map((c,i)=>i?`<td>${c}</td>`:`<th scope="row">${c}</th>`).join('')}</tr>`).join('')}</tbody></table></div>
+        ${tb.nota ? `<p class="tab-nota">${tb.nota}</p>` : ''}</figure>`; }
+  }
+  if (t.referencias && t.referencias.length)
+    h += `<div class="refs"><h2>References</h2><ol>${t.referencias.map(r=>`<li>${r}</li>`).join('')}</ol><p style="text-align:right;font-family:var(--serif);margin:8px 0 0">[…]</p></div>`;
+  const fonte = f.tipo === 'real' ? `Fonte: ${f.referencia || ''}${f.url ? ` — <a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.url)}</a>` : ''}${f.licenca ? ` (${esc(f.licenca)})` : ''}` : (t.rodape || '');
+  if (fonte) h += `<p class="foot">${fonte}</p>`;
+  $('sheet').innerHTML = h;
+}
+
+function renderQ(){
+  $('qlist').innerHTML = S.questoes.map((q,i)=>{
+    const n = i+1, nn = String(n).padStart(2,'0');
+    const opts = q.alternativas.map((t,j)=>`<li><label id="lab-${n}-${j}"><input type="radio" name="q${n}" id="q${n}o${j}" value="${L[j]}"${st.respostas[n]===L[j]?' checked':''}><span class="L">${L[j]}</span><span>${linkRefs(t)}</span></label></li>`).join('');
+    return `<article class="q" id="q${n}"><div class="qhead"><span class="qn">${nn}</span><span class="qtag" id="tag${n}" hidden>${esc(TIPOS[q.tipo]||q.tipo)}</span>
+      <label class="dif"><input type="checkbox" data-dif="${n}"${st.dificeis.includes(n)?' checked':''}> achei difícil</label></div>
+      <div class="qbody"><div class="qp">${linkRefs(q.enunciado)}</div><ol class="opts">${opts}</ol><div class="exp" id="exp${n}" hidden></div></div></article>`;
+  }).join('');
+  updateProg();
+}
+
+function updateProg(){
+  const c = Object.keys(st.respostas).length, tot = S.questoes.length;
+  $('prog').textContent = graded ? `${score()}/${tot} acertos` : `${c}/${tot} respondidas`;
+  $('tabQ').textContent = graded ? `Questões · ${score()}/${tot} certas` : `Questões · ${c}/${tot}`;
+}
+function score(){ return S.questoes.reduce((s,q,i)=>s+(st.respostas[i+1]===q.resposta?1:0),0); }
+
+function showGrades(){
+  graded = true; clearInterval(timerId);
+  const tot = S.questoes.length;
+  S.questoes.forEach((q,i)=>{
+    const n = i+1, chosen = st.respostas[n];
+    $('q'+n).classList.add('graded');
+    q.alternativas.forEach((_,j)=>{
+      const lab = $(`lab-${n}-${j}`);
+      lab.querySelector('input').disabled = true;
+      lab.classList.toggle('right', L[j]===q.resposta);
+      lab.classList.toggle('wrong', L[j]===chosen && chosen!==q.resposta);
+    });
+    $('tag'+n).hidden = false;
+    const v = !chosen ? `<p class="verdict no">Em branco. Resposta: (${q.resposta})</p>`
+      : chosen===q.resposta ? `<p class="verdict ok">Certa (${q.resposta})</p>`
+      : `<p class="verdict no">Você marcou (${chosen}). Resposta: (${q.resposta})</p>`;
+    const iss = window.urlIssues ? window.urlIssues() : '';
+    const rep = iss ? `<p class="reportar"><a href="${iss}/new?title=${encodeURIComponent('Simulado ' + SID + ' · questão ' + String(n).padStart(2,'0'))}" target="_blank" rel="noopener">Achou um erro nesta questão? Avise no GitHub</a></p>` : '';
+    $('exp'+n).innerHTML = v + linkRefs(q.explicacao) + (q.dica ? `<p class="tip">${linkRefs(q.dica)}</p>` : '') + rep;
+    $('exp'+n).hidden = false;
+  });
+  const s = score();
+  const cells = S.questoes.map((q,i)=>`<a href="#q${i+1}" class="cell ${st.respostas[i+1]===q.resposta?'ok':'no'}">${String(i+1).padStart(2,'0')}</a>`).join('');
+  $('score').innerHTML = `<div class="big">${s}<small> / ${tot} acertos (${Math.round(s/tot*100)}%)</small></div><div class="grid16">${cells}</div>`;
+  $('score').hidden = false;
+  if (window.APOIO && window.APOIO.url){
+    $('score').insertAdjacentHTML('beforeend', '<p data-apoio class="apoio-nota"></p>');
+    window.preencherApoio && window.preencherApoio();
+  }
+  ['gradeBtn','gradeBtn2'].forEach(id=>$(id).disabled = true);
+  updateProg(); showPane('q');
+  $('paneQ').scrollTo({top:0}); window.scrollTo({top:0});
+}
+
+let armed = false;
+async function grade(){
+  const faltam = S.questoes.length - Object.keys(st.respostas).length;
+  if (faltam > 0 && !armed){
+    armed = true;
+    ['gradeBtn','gradeBtn2'].forEach(id=>$(id).textContent = `Faltam ${faltam}. Corrigir assim mesmo?`);
+    setTimeout(()=>{ armed=false; ['gradeBtn','gradeBtn2'].forEach(id=>$(id).textContent='Corrigir'); }, 4000);
+    return;
+  }
+  contar();
+  const dur = Math.round(st.decorrido);
+  try{
+    await Store.registrar(S, SID, st.respostas, st.dificeis, dur);
+    $('banner').innerHTML = `Tentativa registrada no painel (tempo: ${fmt(dur)}).`;
+  }catch(e){
+    $('banner').innerHTML = `Não consegui registrar a tentativa (${esc(e.message)}). A correção abaixo vale, mas não entrou no painel.`;
+  }
+  $('banner').hidden = false;
+  try{ localStorage.removeItem(KEY); }catch(e){}
+  showGrades();
+}
+
+function newAttempt(){
+  try{ localStorage.removeItem(KEY); }catch(e){}
+  location.href = 'prova.html?id=' + encodeURIComponent(SID);
+}
+
+let paneAtual = 'text';
+const rolagem = {text:0, q:0};
+function showPane(which){
+  const mobile = matchMedia('(max-width:999px)').matches;
+  if (mobile && which !== paneAtual){ rolagem[paneAtual] = window.scrollY; }
+  $('tabText').setAttribute('aria-selected', which==='text');
+  $('tabQ').setAttribute('aria-selected', which==='q');
+  $('paneText').hidden = mobile && which!=='text';
+  $('paneQ').hidden = mobile && which!=='q';
+  if (mobile && which !== paneAtual){ paneAtual = which; window.scrollTo(0, rolagem[which] || 0); }
+  paneAtual = which;
+  if (which === 'q') $('voltarQ').hidden = true;
+}
+let questaoOrigem = null;
+function goPara(n, origem){
+  const el = $('p'+n); if(!el) return;
+  if (origem && matchMedia('(max-width:999px)').matches){
+    questaoOrigem = origem;
+    $('voltarQ').textContent = '↩ Voltar à questão ' + origem.id.replace('q','').padStart(2,'0');
+    $('voltarQ').hidden = false;
+  }
+  showPane('text');
+  const pane = $('paneText'), smooth = matchMedia('(prefers-reduced-motion:reduce)').matches ? 'auto' : 'smooth';
+  if (getComputedStyle(pane).overflowY === 'auto') pane.scrollTo({top: pane.scrollTop + el.getBoundingClientRect().top - pane.getBoundingClientRect().top - 16, behavior: smooth});
+  else el.scrollIntoView({behavior: smooth, block:'start'});
+  el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
+}
+
+document.addEventListener('change', e=>{
+  const t = e.target;
+  if (t.dataset.dif){
+    const n = +t.dataset.dif;
+    st.dificeis = t.checked ? [...new Set([...st.dificeis, n])] : st.dificeis.filter(x=>x!==n);
+    save(); return;
+  }
+  if (t.type!=='radio' || graded) return;
+  st.respostas[+t.name.slice(1)] = t.value; save(); updateProg();
+});
+document.addEventListener('click', e=>{ const b = e.target.closest('.pref'); if(b){ e.preventDefault(); goPara(b.dataset.p, b.closest('article.q')); } });
+$('voltarQ').addEventListener('click', ()=>{
+  showPane('q');
+  if (questaoOrigem) questaoOrigem.scrollIntoView({block:'start'});
+  $('voltarQ').hidden = true;
+});
+['gradeBtn','gradeBtn2'].forEach(id=>$(id).addEventListener('click', grade));
+$('newBtn').addEventListener('click', newAttempt);
+$('tabText').addEventListener('click', ()=>showPane('text'));
+$('tabQ').addEventListener('click', ()=>showPane('q'));
+matchMedia('(max-width:999px)').addEventListener('change', ()=>showPane($('tabQ').getAttribute('aria-selected')==='true'?'q':'text'));
+
+new ResizeObserver(([e])=>document.documentElement.style.setProperty('--hh', e.target.offsetHeight+'px')).observe(document.querySelector('.top'));
+(async function init(){
+  try{
+    const [rs, rt] = await Promise.all([fetch('data/simulados/'+encodeURIComponent(SID)+'.json'), fetch('data/tipos.json')]);
+    if (!rs.ok) throw new Error('simulado não encontrado');
+    S = await rs.json(); TIPOS = await rt.json();
+  }catch(e){
+    $('main').innerHTML = `<div class="err">Não consegui abrir “${esc(SID)}”: ${esc(e.message)}. <a href="./">Voltar ao painel</a>.</div>`;
+    return;
+  }
+  document.title = S.titulo + ' · Simulado';
+  $('hdrTitle').textContent = S.titulo;
+  $('intro').innerHTML = `Responda às questões com base no texto intitulado <i>${S.texto.titulo || S.titulo}</i>. Clique em qualquer “§” para ir ao parágrafo. Marque “achei difícil” nas questões em que hesitou: isso entra no painel.`;
+  renderText();
+  if (VER){
+    const tent = await Store.listar();
+    const t = tent.find(x=>x.id===VER);
+    if (t){
+      st = {respostas:{}, dificeis:[], decorrido:0};
+      t.questoes.forEach(q=>{ if(q.marcada) st.respostas[q.n]=q.marcada; if(q.dificil) st.dificeis.push(q.n); });
+      renderQ();
+      document.querySelectorAll('[data-dif]').forEach(c=>c.disabled=true);
+      $('banner').innerHTML = `Revisão da tentativa de ${t.data.slice(0,16).replace('T',' ')} (${t.acertos}/${t.total}). <a href="prova.html?id=${encodeURIComponent(SID)}">Fazer nova tentativa</a>.`;
+      $('banner').hidden = false;
+      $('timer').textContent = fmt(t.duracao_s || 0);
+      showGrades(); return;
+    }
+  }
+  load(); renderQ(); showPane('text');
+  ultimoTick = Date.now();
+  const tick = ()=>{ contar(); $('timer').textContent = fmt(Math.round(st.decorrido)); };
+  tick(); timerId = setInterval(()=>{ tick(); if (Math.round(st.decorrido) % 10 === 0) save(); }, 1000);
+  // pausa quando a aba some (troca de aba, janela minimizada, página fechada) e retoma ao voltar
+  document.addEventListener('visibilitychange', ()=>{ contar(); ultimoTick = Date.now(); save(); });
+  window.addEventListener('pagehide', ()=>{ contar(); save(); });
+})();
+
+// soma ao tempo ativo o intervalo desde o último tick, se a página estava visível e o intervalo é plausível
+function contar(){
+  const agora = Date.now(), delta = agora - ultimoTick;
+  ultimoTick = agora;
+  if (graded || VER || document.visibilityState !== 'visible') return;
+  if (delta > 0 && delta <= PAUSA_MAX) st.decorrido += delta / 1000;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulados TESLLE de Inglês grátis · leitura acadêmica com correção comentada</title>
+<meta name="description" content="Simulados gratuitos para o TESLLE de Língua Inglesa e outras provas de suficiência em leitura em inglês: texto acadêmico com parágrafos numerados, 16 questões de múltipla escolha e correção comentada com dicas por tipo de questão.">
+<meta name="keywords" content="TESLLE, simulado TESLLE, TESLLE inglês, prova de suficiência em inglês, proficiência em leitura em inglês, inglês instrumental, mestrado, doutorado, UFSM">
+<link rel="canonical" href="https://fuzzylabx.github.io/simulados-teslle-ingles/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Simulados de Leitura em Inglês">
+<meta property="og:title" content="Simulados TESLLE de Inglês grátis">
+<meta property="og:description" content="Texto acadêmico, 16 questões e correção comentada no formato das provas de suficiência em leitura. Acompanhe seu desempenho por tipo de questão.">
+<meta property="og:url" content="https://fuzzylabx.github.io/simulados-teslle-ingles/">
+<meta property="og:image" content="https://fuzzylabx.github.io/simulados-teslle-ingles/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#161d26" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<script src="tema.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="estilo.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"Simulados de Leitura em Inglês","inLanguage":"pt-BR",
+ "description":"Simulados gratuitos para o TESLLE de Língua Inglesa e provas de suficiência em leitura em inglês, com correção comentada.",
+ "url":"https://fuzzylabx.github.io/simulados-teslle-ingles/"}
+</script>
+<style>
+/* Layout: hero em duas colunas (texto + folha de prova), depois seções empilhadas numa coluna de 64rem */
+.skip{position:absolute;left:-999px;top:8px;z-index:10;background:var(--ink);color:var(--paper);padding:8px 12px;border-radius:6px}
+.skip:focus{left:8px}
+.nav{display:flex;gap:4px;align-items:center}
+.nav a{color:var(--muted);text-decoration:none;font-size:14px;padding:6px 10px;border-radius:6px}
+.nav a:hover{color:var(--ink);background:var(--paper-2)}
+.wrap{max-width:64rem;margin:0 auto;padding:0 16px}
+section{scroll-margin-top:calc(var(--hh) + 12px)}
+
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:48px;align-items:center;padding:56px 0 48px}
+.eyebrow{font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:0 0 14px}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(34px,5vw,52px);line-height:1.08;margin:0;text-wrap:balance;letter-spacing:-.01em}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.lede{color:var(--muted);font-size:17px;margin:18px 0 0;max-width:36rem}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.share{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:18px;font-size:13.5px;color:var(--muted)}
+.facts{display:flex;gap:22px;flex-wrap:wrap;margin:28px 0 0;padding:0;list-style:none;font-size:13.5px;color:var(--muted)}
+.facts b{display:block;font-family:var(--serif);font-weight:600;font-size:24px;color:var(--ink);line-height:1.1}
+
+.sheet{background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);padding:22px 22px 18px;transform:rotate(1.2deg);
+  display:grid;gap:12px;font-family:var(--serif);font-size:15px;line-height:1.55}
+.sheet .jt{font-family:var(--sans);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.sheet h3{margin:0;font-weight:400;font-size:22px;line-height:1.15}
+.sheet .rule{border-top:2px solid var(--ink)}
+.sheet .p{display:grid;grid-template-columns:34px 1fr;gap:8px}
+.sheet .pn{font-family:var(--mono);font-size:10.5px;border:1px solid var(--ink);height:18px;text-align:center;margin-top:3px}
+.sheet .hl{background:var(--mark)}
+.sheet .q{font-family:var(--sans);font-size:13px;border-top:1px dashed var(--line);padding-top:10px;display:grid;gap:6px}
+.sheet .q div{display:flex;gap:8px;align-items:center}
+.sheet .L{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;border:1.5px solid var(--ink);font-family:var(--mono);font-size:10.5px;flex:none}
+.sheet .q .ok{color:var(--ok)} .sheet .q .ok .L{border-color:var(--ok);background:var(--ok-soft)}
+
+.block{padding:40px 0;border-top:1px solid var(--line)}
+.block > h2{font-family:var(--serif);font-weight:400;font-size:28px;margin:0 0 6px;text-wrap:balance}
+.block > .sub{color:var(--muted);margin:0 0 20px;max-width:44rem}
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:0;padding:0;list-style:none}
+.how li{background:var(--paper);border:1px solid var(--line);padding:16px;font-size:14px;color:var(--muted)}
+.how b{display:block;font-family:var(--serif);font-weight:600;font-size:17px;margin-bottom:4px;color:var(--ink)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.tags span{font-size:12.5px;background:var(--paper);border:1px solid var(--line);border-radius:99px;padding:3px 10px;color:var(--muted)}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.simbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:-6px 0 14px;font-size:13.5px;color:var(--muted)}
+.card.done{opacity:.86}
+.card{background:var(--paper);border:1px solid var(--line);padding:18px;display:grid;gap:10px;align-content:start;transition:box-shadow .15s,border-color .15s}
+.card:hover{box-shadow:var(--shadow);border-color:var(--muted)}
+.card h3{margin:0;font-family:var(--serif);font-weight:600;font-size:19px;line-height:1.25}
+.card .meta{display:flex;gap:6px 12px;flex-wrap:wrap;font-size:12.5px;color:var(--muted)}
+.card .foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:4px}
+.card .score{font-size:13px;color:var(--muted)}
+
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px}
+.kpi{background:var(--paper);border:1px solid var(--line);padding:12px 14px}
+.kpi .v{font-family:var(--serif);font-size:28px;line-height:1.1}
+.kpi .l{font-size:12.5px;color:var(--muted)}
+h3.sec{font-size:12.5px;letter-spacing:.07em;text-transform:uppercase;margin:22px 0 8px;color:var(--muted);font-weight:600}
+.tbl{overflow-x:auto;background:var(--paper);border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-size:12px;color:var(--muted);font-weight:500;letter-spacing:.03em;background:var(--paper-2)}
+tr:last-child td{border-bottom:0}
+td.r,th.r{text-align:right}
+.bar{display:inline-block;width:72px;height:6px;border-radius:3px;background:var(--line);vertical-align:middle;margin-right:8px;overflow:hidden}
+.bar i{display:block;height:100%}
+.dots{font-family:var(--mono);font-size:12px;letter-spacing:2px;white-space:nowrap}
+.dots .o{color:var(--ok)} .dots .x{color:var(--bad)}
+.acts{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.empty{background:var(--paper);border:1px dashed var(--line);padding:22px;color:var(--muted);font-size:14.5px;margin:0}
+.store{display:flex;gap:10px 14px;flex-wrap:wrap;align-items:center;font-size:13.5px;color:var(--muted);margin-top:12px}
+
+footer{border-top:1px solid var(--line);margin-top:24px;background:var(--paper)}
+footer .wrap{padding-block:28px 36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;font-size:13px;color:var(--muted)}
+footer h4{margin:0 0 6px;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink);font-weight:600}
+footer p{margin:0}
+.apoio{grid-column:1/-1;font-size:13.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+.apoio a{font-weight:500}
+code{font-family:var(--mono);font-size:12.5px;background:var(--accent-soft);padding:1px 5px;border-radius:4px;color:var(--ink)}
+.noscript{background:var(--warn-soft);border:1px solid var(--warn);padding:10px 14px;margin:16px 0 0}
+
+@media (max-width:820px){
+  .hero{grid-template-columns:1fr;gap:32px;padding:36px 0 32px}
+  .sheet{transform:none;max-width:30rem}
+  .nav a.hide-sm{display:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#simulados">Pular para os simulados</a>
+<header class="top">
+  <a class="brand" href="./"><span class="mark" aria-hidden="true">§</span><b>Simulados de Leitura em Inglês</b></a>
+  <div class="spacer"></div>
+  <nav class="nav" aria-label="Seções">
+    <a href="#prova" class="hide-sm">A prova</a>
+    <a href="#simulados">Simulados</a>
+    <a href="estudos.html">Estudos</a>
+    <a href="#desempenho" class="hide-sm">Desempenho</a>
+  </nav>
+  <button class="icon-btn" type="button" data-tema aria-label="Alternar tema"></button>
+</header>
+
+<main id="conteudo">
+<div class="wrap">
+  <noscript><p class="noscript">Este site precisa de JavaScript para mostrar os simulados e corrigir as provas.</p></noscript>
+  <div class="hero">
+    <div>
+      <p class="eyebrow">TESLLE · Língua Inglesa · grátis</p>
+      <h1>Treine para o TESLLE com simulados <em>no formato da prova</em></h1>
+      <p class="lede">Textos acadêmicos com parágrafos numerados, 16 questões em português e correção comentada, com o trecho que decide cada resposta. Serve também para outras provas de suficiência em leitura em inglês de mestrado e doutorado.</p>
+      <div class="cta">
+        <a class="btn primary big" id="ctaStart" href="#simulados">Começar um simulado</a>
+        <button class="btn big" type="button" data-sortear>Sortear um simulado</button>
+      </div>
+      <p class="sub" id="randMsg" role="status" style="margin:10px 0 0;font-size:13.5px;color:var(--muted)"></p>
+      <ul class="facts">
+        <li><b class="num" id="factSims">—</b>simulados</li>
+        <li><b>16</b>questões cada</li>
+        <li><b>0</b>cadastros</li>
+      </ul>
+      <div class="share"><span>Estudando com alguém?</span>
+        <a class="btn small" id="waBtn" href="https://wa.me/" target="_blank" rel="noopener">Enviar no WhatsApp</a>
+        <button class="btn small" type="button" id="copyBtn">Copiar link</button><span id="copyMsg" role="status"></span></div>
+    </div>
+    <div class="sheet" aria-hidden="true">
+      <span class="jt">Journal of Computing Research Practice</span>
+      <h3>Reproducibility and replicability in computational research</h3>
+      <div class="rule"></div>
+      <div class="p"><span class="pn">§ 1</span><span>Several responses to this situation can be identified […]. It is <span class="hl">the second of these</span> which is defended here.</span></div>
+      <div class="p"><span class="pn">§ 2</span><span>Taking three frequently cited sources, reproducibility can be described as…</span></div>
+      <div class="q"><span>No segmento destacado (§1), “the second of these” se refere a</span>
+        <div><span class="L">a</span>abandoning both terms…</div>
+        <div class="ok"><span class="L">b</span>retaining them in the sense established…</div></div>
+    </div>
+  </div>
+
+  <section class="block" id="prova">
+    <h2>Como é a prova</h2>
+    <p class="sub">É uma prova de compreensão de leitura: um único artigo acadêmico em inglês e 16 questões em português sobre ele, cada uma indicando o parágrafo (§) que você deve ler. Não há conversação nem redação. Em geral, são cerca de 2 horas, ou uns 7 minutos por questão.</p>
+    <ul class="how">
+      <li><b>Um artigo acadêmico</b>Texto autêntico em inglês, de cerca de 5 mil palavras (umas seis páginas), com resumo, seções, parágrafos numerados (§) e, às vezes, tabelas.</li>
+      <li><b>16 questões</b>Múltipla escolha com 5 alternativas, enunciados em português e trechos citados em inglês.</li>
+      <li><b>Correção comentada</b>Cada resposta explica o trecho que decide a questão e traz uma dica de método.</li>
+      <li><b>Desempenho por tipo</b>O painel soma seus acertos por tipo de questão e mostra onde você precisa treinar.</li>
+    </ul>
+    <p style="margin:18px 0 0"><a class="btn" href="estudos.html">Estudar o conteúdo, com exercícios interativos →</a></p>
+    <div class="tags" aria-label="Tipos de questão cobrados">
+      <span>Tema</span><span>Referência pronominal</span><span>Tradução de sintagma nominal</span><span>Conectores</span><span>Modalização</span><span>Tempos e vozes verbais</span><span>Acordo/Desacordo</span><span>Afirmações I, II, III</span><span>Autoria</span><span>Síntese da conclusão</span>
+    </div>
+  </section>
+
+  <section class="block" id="simulados">
+    <h2>Simulados</h2>
+    <p class="sub">Separe cerca de 2 horas, como na prova. Comece pelas questões, que indicam o parágrafo, e clique em “§” para ir direto a ele.</p>
+    <div class="simbar"><span id="simCount"></span><button class="btn small" type="button" data-sortear>Sortear um que eu não fiz</button></div>
+    <div class="cards" id="sims"></div>
+  </section>
+
+  <section class="block" id="desempenho">
+    <h2>Seu desempenho</h2>
+    <p class="sub" id="modoTxt"></p>
+    <div id="perf"></div>
+    <div class="store" id="store"></div>
+  </section>
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><h4>Sobre</h4><p>Material não oficial, feito por estudantes. Não tem vínculo com a UFSM nem com a organização do TESLLE, e não reproduz provas aplicadas. Os textos, autores, periódicos, citações e dados dos simulados são fictícios, escritos no formato da prova para fins de estudo.</p></div>
+    <div><h4>Privacidade</h4><p>Sem cadastro, cookies, anúncios ou rastreamento. Suas respostas e resultados ficam só no seu navegador, e você pode exportá-los ou apagá-los quando quiser.</p></div>
+    <div data-apoio hidden class="apoio"></div>
+    <div data-feedback hidden class="apoio" style="border-top:0;padding-top:0"></div>
+  </div>
+</footer>
+<input type="file" id="importFile" accept="application/json,.json" hidden>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const pct = (a,b) => b ? Math.round(100*a/b) : 0;
+const cls = p => p < 50 ? 'bad' : p < 75 ? 'warn' : 'ok';
+const fmtD = s => s.slice(0,16).replace('T',' ');
+const fmtT = s => { if(!s) return '—'; const m = Math.round(s/60); return m >= 60 ? `${Math.floor(m/60)}h${String(m%60).padStart(2,'0')}` : `${m} min`; };
+
+async function init(){
+  const [sims, TIPOS] = await Promise.all(['data/index.json','data/tipos.json'].map(u=>fetch(u,{cache:'no-store'}).then(r=>r.json())));
+  const tent = await Store.listar();
+  const ids = new Set(sims.map(s=>s.id));
+  ESTADO = {sims, tent};
+  const feitos = sims.filter(s=>tent.some(t=>t.simulado===s.id)).length;
+  $('simCount').textContent = sims.length ? `Você já fez ${feitos} de ${sims.length} simulados.` : '';
+  $('factSims').textContent = sims.length;
+
+  // próximo simulado: o primeiro ainda não feito, senão o primeiro
+  const proximo = sims.find(s=>!tent.some(t=>t.simulado===s.id)) || sims[0];
+  if (proximo){ $('ctaStart').href = 'prova.html?id=' + encodeURIComponent(proximo.id); $('ctaStart').textContent = tent.length ? 'Fazer o próximo simulado' : 'Começar um simulado'; }
+
+  $('sims').innerHTML = sims.length ? sims.map(s=>{
+    const ts = tent.filter(t=>t.simulado===s.id);
+    const best = ts.length ? Math.max(...ts.map(t=>t.acertos)) : null;
+    const meta = [`${s.n_questoes} questões`, s.n_paragrafos ? `${s.n_paragrafos} parágrafos` : '', ts.length ? `${ts.length} tentativa${ts.length>1?'s':''}` : 'nunca feito'].filter(Boolean);
+    const score = best!==null ? `<span class="pill ${cls(pct(best,s.n_questoes))} num">melhor ${best}/${s.n_questoes}</span>` : '<span class="score">—</span>';
+    return `<article class="card${ts.length?' done':''}"><h3>${esc(s.titulo)}</h3>
+      <div class="meta">${meta.map(m=>`<span>${m}</span>`).join('')}${s.privado?'<span class="pill real">local</span>':''}</div>
+      <div class="foot">${score}<a class="btn small ${ts.length?'':'primary'}" href="prova.html?id=${encodeURIComponent(s.id)}">${ts.length?'Refazer':'Fazer'}</a></div></article>`;
+  }).join('') : '<p class="empty">Nenhum simulado disponível ainda.</p>';
+
+  const local = Store.modo === 'navegador';
+  $('modoTxt').textContent = local
+    ? 'Cada prova corrigida entra aqui. Os resultados ficam só neste navegador: exporte de vez em quando para não perder nada.'
+    : 'Cada prova corrigida entra aqui.';
+
+  if (!tent.length){
+    $('perf').innerHTML = '<p class="empty">Corrija sua primeira prova para ver aqui a nota, o tempo e o desempenho por tipo de questão.</p>';
+  } else {
+    const tq = tent.reduce((a,t)=>a+t.total,0), ta = tent.reduce((a,t)=>a+t.acertos,0), ult = tent[tent.length-1];
+    const agg = {};
+    for (const t of tent) for (const q of t.questoes){
+      const a = agg[q.tipo] ??= {tot:0, ok:0, dif:0, seq:[]};
+      a.tot++; a.ok += q.certa ? 1 : 0; a.dif += q.dificil ? 1 : 0; a.seq.push(q.certa);
+    }
+    const linhas = Object.entries(agg).sort((x,y)=>pct(x[1].ok,x[1].tot)-pct(y[1].ok,y[1].tot) || y[1].dif-x[1].dif);
+    const pior = linhas[0];
+    $('perf').innerHTML = `<div class="kpis">${[
+        [tent.length, 'tentativas'], [pct(ta,tq)+'%', 'acerto geral'], [`${ult.acertos}/${ult.total}`, 'última prova'],
+        [pior && pct(pior[1].ok,pior[1].tot) < 75 ? esc(TIPOS[pior[0]]||pior[0]) : 'nenhum', 'tipo a reforçar'],
+      ].map(([v,l],i)=>`<div class="kpi"><div class="v num"${i===3?' style="font-size:18px;line-height:1.3"':''}>${v}</div><div class="l">${l}</div></div>`).join('')}</div>
+      <h3 class="sec">Por tipo de questão, do pior para o melhor</h3>
+      <div class="tbl"><table><thead><tr><th>Tipo</th><th class="r">Acertos</th><th>%</th><th class="r">Achou difícil</th><th>Últimas (antiga → recente)</th></tr></thead><tbody>${
+        linhas.map(([k,a])=>{ const p = pct(a.ok,a.tot);
+          return `<tr><td>${esc(TIPOS[k]||k)}</td><td class="r num">${a.ok}/${a.tot}</td>
+          <td style="white-space:nowrap"><span class="bar"><i style="width:${p}%;background:var(--${cls(p)})"></i></span><span class="num">${p}%</span></td><td class="r num">${a.dif||''}</td>
+          <td class="dots">${a.seq.slice(-8).map(c=>c?'<span class="o" title="certa">●</span>':'<span class="x" title="errada">✕</span>').join('')}</td></tr>`; }).join('')
+      }</tbody></table></div>
+      <h3 class="sec">Histórico de tentativas</h3>
+      <div class="tbl"><table><thead><tr><th>Data</th><th>Simulado</th><th class="r">Nota</th><th class="r">Tempo</th><th>Erradas</th><th></th></tr></thead><tbody>${
+        [...tent].reverse().map(t=>{ const p = pct(t.acertos,t.total);
+          const err = t.questoes.filter(q=>!q.certa).map(q=>String(q.n).padStart(2,'0')).join(' ');
+          const ver = ids.has(t.simulado) ? `<a class="btn small" href="prova.html?id=${encodeURIComponent(t.simulado)}&ver=${encodeURIComponent(t.id)}">Ver correção</a>` : '';
+          return `<tr><td class="num">${fmtD(t.data)}</td><td>${esc(t.titulo||t.simulado)}</td>
+            <td class="r"><span class="pill ${cls(p)} num">${t.acertos}/${t.total}</span></td><td class="r num">${fmtT(t.duracao_s)}</td>
+            <td style="font-family:var(--mono);font-size:12px">${err||'nenhuma'}</td>
+            <td><div class="acts">${ver}<button class="btn small danger" type="button" data-del="${esc(t.id)}">Apagar</button></div></td></tr>`; }).join('')
+      }</tbody></table></div>`;
+  }
+
+  $('store').innerHTML = `<button class="btn small" type="button" id="expBtn"${tent.length?'':' disabled'}>Exportar resultados (.json)</button>`
+    + (local ? `<button class="btn small" type="button" id="impBtn">Importar resultados</button><span id="impMsg" role="status"></span>` : '');
+}
+
+let ESTADO = {sims:[], tent:[]};
+function sortear(){
+  const {sims, tent} = ESTADO;
+  if (!sims.length) return;
+  const novos = sims.filter(s=>!tent.some(t=>t.simulado===s.id));
+  const pool = novos.length ? novos : sims;
+  const s = pool[Math.floor(Math.random()*pool.length)];
+  if (!novos.length) $('randMsg').textContent = 'Você já fez todos. Sorteei um para refazer.';
+  setTimeout(()=>{ location.href = 'prova.html?id=' + encodeURIComponent(s.id); }, novos.length ? 0 : 900);
+}
+document.addEventListener('click', async e=>{
+  if (e.target.closest('[data-sortear]')) return sortear();
+  const del = e.target.closest('[data-del]');
+  if (del){
+    if (del.dataset.armed !== '1'){ del.dataset.armed='1'; del.textContent='Confirmar?'; setTimeout(()=>{ del.dataset.armed=''; del.textContent='Apagar'; }, 3500); return; }
+    await Store.apagar(del.dataset.del); return init();
+  }
+  if (e.target.id === 'expBtn'){
+    const blob = new Blob([JSON.stringify(await Store.listar(), null, 1)], {type:'application/json'});
+    const a = Object.assign(document.createElement('a'), {href:URL.createObjectURL(blob), download:`resultados-simulados-${new Date().toISOString().slice(0,10)}.json`});
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href), 1000);
+  }
+  if (e.target.id === 'impBtn') $('importFile').click();
+});
+$('importFile').addEventListener('change', async e=>{
+  const f = e.target.files[0]; if(!f) return;
+  try{
+    const lista = JSON.parse(await f.text());
+    if (!Array.isArray(lista)) throw new Error('formato inesperado');
+    const n = Store.importar(lista);
+    await init();
+    $('impMsg').textContent = n ? `${n} tentativa(s) importada(s).` : 'Nada novo nesse arquivo.';
+  }catch(err){ await init(); $('impMsg').textContent = `Não consegui ler o arquivo: ${err.message}.`; }
+  e.target.value = '';
+});
+const siteUrl = location.origin + location.pathname.replace(/index\.html$/, '');
+$('waBtn').href = 'https://wa.me/?text=' + encodeURIComponent('Simulados grátis para o TESLLE de inglês, com correção comentada: ' + siteUrl);
+$('copyBtn').addEventListener('click', async ()=>{
+  try{ await navigator.clipboard.writeText(siteUrl); $('copyMsg').textContent = 'Link copiado.'; }
+  catch(e){ $('copyMsg').textContent = siteUrl; }
+});
+init();
+</script>
+</body>
+</html>

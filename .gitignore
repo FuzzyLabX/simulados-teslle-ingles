@@ -1,0 +1,9 @@
+
+
+/*
+!/docs/
+!/README.md
+!/.gitignore
+
+# dentro do site, nada de lixo de sistema
+docs/**/.DS_Store

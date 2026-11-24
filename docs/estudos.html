@@ -1,0 +1,913 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estudos · leitura de artigos acadêmicos em inglês</title>
+<meta name="description" content="Guia interativo para provas de suficiência em leitura em inglês: quantificadores, pronomes e referência, tempos e vozes verbais, conectores, modalização, sintagma nominal, falsos cognatos e estrutura do artigo.">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#161d26" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<script src="tema.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="estilo.css">
+<style>
+/* Layout: índice fixo à esquerda no desktop; seções empilhadas à direita, cada uma com explicação + um exercício interativo */
+.nav{display:flex;gap:4px;align-items:center}
+.nav a{color:var(--muted);text-decoration:none;font-size:14px;padding:6px 10px;border-radius:6px}
+.nav a:hover,.nav a[aria-current]{color:var(--ink);background:var(--paper-2)}
+.layout{max-width:72rem;margin:0 auto;padding:0 16px;display:grid;grid-template-columns:13rem minmax(0,1fr);gap:40px}
+.toc{position:sticky;top:calc(var(--hh) + 20px);align-self:start;padding-top:40px;font-size:13.5px}
+.toc ol{list-style:none;margin:0;padding:0;display:grid;gap:2px;counter-reset:t}
+.toc a{display:block;padding:5px 10px;border-left:2px solid var(--line);color:var(--muted);text-decoration:none}
+.toc a:hover{color:var(--ink);border-color:var(--muted)}
+.toc a.on{color:var(--accent);border-color:var(--accent);font-weight:500}
+main{min-width:0;padding:40px 0 64px}
+.intro h1{font-family:var(--serif);font-weight:400;font-size:clamp(32px,4.5vw,46px);line-height:1.1;margin:0;text-wrap:balance}
+.intro p{color:var(--muted);font-size:16.5px;max-width:42rem;margin:14px 0 0}
+section.st{padding:36px 0;border-top:1px solid var(--line);scroll-margin-top:calc(var(--hh) + 8px)}
+section.st:first-of-type{border-top:0}
+.st h2{font-family:var(--serif);font-weight:400;font-size:30px;margin:0 0 4px;text-wrap:balance}
+.st .why{color:var(--muted);margin:0 0 18px;max-width:46rem}
+.st h3{font-size:12.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:26px 0 10px}
+.st p{max-width:46rem}
+.lab{background:var(--paper);border:1px solid var(--line);padding:18px;display:grid;gap:14px}
+.lab .lt{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.en{font-family:var(--serif);font-size:17px;line-height:1.7}
+.hint{font-size:13.5px;color:var(--muted)}
+.fb{font-size:14.5px;padding:10px 12px;border-radius:7px;background:var(--paper-2);border:1px solid var(--line)}
+.fb.ok{background:var(--ok-soft);border-color:var(--ok)}
+.fb.no{background:var(--bad-soft);border-color:var(--bad)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--paper);border-radius:99px;padding:4px 11px;font-size:13.5px;color:var(--ink)}
+.chip:hover{border-color:var(--muted)}
+.chip.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chip.good{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.chip.bad{background:var(--bad-soft);border-color:var(--bad);color:var(--bad)}
+.tbl{overflow-x:auto;border:1px solid var(--line);background:var(--paper)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;color:var(--muted);font-weight:500;background:var(--paper-2)}
+tr:last-child td{border-bottom:0}
+td i,td em{font-family:var(--serif);font-size:15px}
+details.more{margin-top:12px}
+details.more summary{cursor:pointer;color:var(--accent);font-size:14px;font-weight:500}
+details.more[open] summary{margin-bottom:10px}
+
+/* régua e medidor */
+.ruler{position:relative;height:150px;margin:6px 34px 0}
+.ruler .track{position:absolute;left:0;right:0;top:92px;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--bad-soft),var(--warn-soft),var(--ok-soft));border:1px solid var(--line)}
+.ruler .tick{position:absolute;top:104px;font-family:var(--mono);font-size:11px;color:var(--muted);transform:translateX(-50%)}
+.ruler .pt{position:absolute;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:2px}
+.ruler .pt .stem{width:1px;background:var(--muted)}
+.ruler .pt .chip{white-space:nowrap;padding:2px 9px;font-size:12.5px}
+.gauge{position:relative;height:56px;margin:6px 8px}
+.gauge .track{position:absolute;left:0;right:0;top:24px;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--paper-2),var(--accent))}
+.gauge .needle{position:absolute;top:10px;width:3px;height:36px;background:var(--ink);border-radius:2px;transition:left .35s ease;transform:translateX(-50%)}
+.gauge .lbl{position:absolute;top:40px;font-size:11.5px;color:var(--muted)}
+
+/* pronomes */
+.pr{border:0;background:var(--accent-soft);color:var(--accent);font:inherit;padding:0 3px;border-radius:4px;border-bottom:2px solid var(--accent);cursor:pointer}
+.pr.done{background:var(--ok-soft);color:var(--ok);border-color:var(--ok)}
+.pr.cur{outline:2px solid var(--accent);outline-offset:1px}
+.ant{border-radius:4px;transition:background .2s}
+.ant.show{background:var(--mark)}
+
+/* decodificador de verbos */
+.dec{display:flex;gap:8px;flex-wrap:wrap}
+.dec input{flex:1;min-width:220px;font:inherit;font-family:var(--serif);font-size:17px;padding:8px 12px;border:1px solid var(--line);border-radius:7px;background:var(--paper);color:var(--ink)}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.steps li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;align-items:start;font-size:14.5px}
+.steps .n{width:24px;height:24px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-family:var(--mono);font-size:12px}
+.tok{display:inline-block;font-family:var(--serif);font-size:16px;padding:1px 6px;border-radius:5px;border:1px solid var(--line);margin:0 2px 4px 0}
+.tok.aux{background:var(--accent-soft);border-color:var(--accent)}
+.tok.be{background:var(--warn-soft);border-color:var(--warn)}
+.tok.main{background:var(--ok-soft);border-color:var(--ok)}
+.result{font-size:16px}
+.result b{font-family:var(--serif);font-size:19px;font-weight:600}
+
+/* quiz conectores */
+.qcard{font-family:var(--serif);font-size:19px;line-height:1.6}
+.qcard mark{background:var(--mark);color:inherit;padding:0 3px;border-radius:3px}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
+.opts button{border:1px solid var(--line);background:var(--paper);border-radius:7px;padding:8px;font-size:14px;text-align:left}
+.opts button:hover{border-color:var(--muted)}
+.opts button.good{background:var(--ok-soft);border-color:var(--ok)}
+.opts button.bad{background:var(--bad-soft);border-color:var(--bad)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:13.5px;color:var(--muted)}
+
+/* sintagma */
+.np{display:flex;flex-wrap:wrap;gap:6px;align-items:flex-end}
+.np .w{display:flex;flex-direction:column;align-items:center;gap:3px}
+.np .w span:first-child{font-family:var(--serif);font-size:19px;padding:3px 8px;border-radius:6px;border:1px solid var(--line);transition:background .25s,border-color .25s}
+.np .w small{font-size:11px;color:var(--muted)}
+.np .w.head span:first-child{border-color:var(--accent);border-width:2px}
+.np .w.lit span:first-child{background:var(--mark)}
+.np .w.done span:first-child{background:var(--ok-soft);border-color:var(--ok)}
+.pt{font-family:var(--serif);font-size:19px;min-height:30px}
+
+/* cognatos */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.flip{perspective:800px;border:0;background:none;padding:0;height:118px;text-align:left}
+.flip .in{position:relative;width:100%;height:100%;transition:transform .45s;transform-style:preserve-3d}
+.flip.on .in{transform:rotateY(180deg)}
+.flip .f,.flip .b{position:absolute;inset:0;backface-visibility:hidden;border:1px solid var(--line);background:var(--paper);padding:12px;display:flex;flex-direction:column;justify-content:center;gap:4px;border-radius:8px}
+.flip .f b{font-family:var(--serif);font-size:21px;font-weight:600}
+.flip .f small{color:var(--muted);font-size:12px}
+.flip .b{transform:rotateY(180deg);background:var(--accent-soft);font-size:13.5px}
+.flip .b .y{color:var(--ok);font-weight:600}
+.flip .b .n{color:var(--bad)}
+
+/* artigo */
+.art{display:grid;grid-template-columns:minmax(0,15rem) minmax(0,1fr);gap:18px;align-items:start}
+.paper{background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);padding:14px;display:grid;gap:6px}
+.paper button{border:1px solid var(--line);background:var(--paper-2);border-radius:5px;padding:7px 10px;text-align:left;font-size:13.5px;font-weight:500;display:flex;justify-content:space-between;gap:8px}
+.paper button small{font-family:var(--mono);color:var(--muted);font-weight:400}
+.paper button.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.paper button.on small{color:var(--paper)}
+.panel{background:var(--paper);border:1px solid var(--line);padding:16px;display:grid;gap:10px;font-size:14.5px}
+.panel h4{margin:0;font-family:var(--serif);font-weight:600;font-size:20px}
+.panel ul{margin:0;padding-left:1.2em;display:grid;gap:4px}
+
+/* estratégia */
+.flow{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:f}
+.flow li{counter-increment:f;display:grid;grid-template-columns:38px minmax(0,1fr);gap:12px;align-items:start;background:var(--paper);border:1px solid var(--line);padding:12px 14px}
+.flow li::before{content:counter(f);width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-family:var(--mono);font-size:13px}
+.flow b{display:block}
+.flow span{color:var(--muted);font-size:14px}
+.ex{display:grid;gap:10px}
+.ex .item{background:var(--paper);border:1px solid var(--line);padding:12px 14px;display:grid;gap:8px}
+.ex .item .en{font-size:16px}
+footer{border-top:1px solid var(--line);background:var(--paper)}
+footer .wrap{max-width:72rem;margin:0 auto;padding:24px 16px 32px;font-size:13px;color:var(--muted)}
+
+@media (max-width:900px){
+  .layout{grid-template-columns:1fr;gap:0}
+  .toc{display:block;position:sticky;top:var(--hh);z-index:3;background:var(--bg);padding:8px 0;margin:0 -16px;padding-left:16px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--line)}
+  .toc::-webkit-scrollbar{display:none}
+  .toc ol{display:flex;gap:6px;white-space:nowrap;padding-right:16px}
+  .toc a{border:1px solid var(--line);border-radius:99px;padding:5px 12px;background:var(--paper);font-size:13.5px}
+  .toc a.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  section.st{scroll-margin-top:calc(var(--hh) + 60px)}
+  .art{grid-template-columns:1fr}
+  .ruler{height:auto;display:flex;flex-wrap:wrap;gap:6px}
+  .ruler .track,.ruler .tick{display:none}
+  .ruler .pt{position:static;transform:none}
+  .ruler .pt .stem{display:none}
+  .ruler{margin:6px 0}
+}
+@media (max-width:600px){ .nav a.hide-sm{display:none} }
+/* gêneros */
+.gens{display:grid;gap:8px}
+.gen{background:var(--paper);border:1px solid var(--line);border-radius:8px}
+.gen summary{list-style:none;cursor:pointer;padding:12px 16px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center}
+.gen summary::-webkit-details-marker{display:none}
+.gen summary b{font-family:var(--serif);font-size:18.5px;font-weight:600}
+.gen summary span{color:var(--muted);font-size:13.5px;grid-column:1}
+.gen summary i.ar{grid-row:1/3;grid-column:2;font-style:normal;color:var(--muted);transition:transform .2s}
+.gen[open] summary i.ar{transform:rotate(90deg)}
+.gen[open] summary{border-bottom:1px solid var(--line)}
+.gen dl{margin:0;padding:12px 16px 16px;display:grid;grid-template-columns:9.5rem minmax(0,1fr);gap:8px 14px;font-size:14.5px}
+.gen dt{color:var(--muted);font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;font-weight:600;padding-top:2px}
+.gen dd{margin:0}
+.gen dd i{font-family:var(--serif);font-size:15.5px}
+.gen .aka{font-size:13px;color:var(--muted)}
+.trail{display:flex;flex-wrap:wrap;gap:6px;font-size:12.5px;color:var(--muted)}
+.trail span{background:var(--paper-2);border:1px solid var(--line);border-radius:99px;padding:2px 9px}
+.dtq{font-family:var(--serif);font-size:19px;line-height:1.45}
+.dtq small{display:block;font-family:var(--sans);font-size:13.5px;color:var(--muted);margin-top:4px}
+.dtres{border:2px solid var(--accent);border-radius:8px;padding:14px;display:grid;gap:6px}
+.dtres b{font-family:var(--serif);font-size:21px}
+@media (max-width:600px){ .gen dl{grid-template-columns:1fr;gap:2px} .gen dd{margin-bottom:8px} }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="./"><span class="mark" aria-hidden="true">§</span><b>Simulados de Leitura em Inglês</b></a>
+  <div class="spacer"></div>
+  <nav class="nav" aria-label="Seções do site">
+    <a href="./#simulados">Simulados</a>
+    <a href="estudos.html" aria-current="page">Estudos</a>
+    <a href="./#desempenho" class="hide-sm">Desempenho</a>
+  </nav>
+  <button class="icon-btn" type="button" data-tema aria-label="Alternar tema"></button>
+</header>
+
+<div class="layout">
+  <aside class="toc" aria-label="Índice">
+    <ol>
+      <li><a href="#detalhe">Leitura de detalhe</a></li>
+      <li><a href="#referencia">Referência e pronomes</a></li>
+      <li><a href="#verbos">Tempos e vozes verbais</a></li>
+      <li><a href="#conectores">Conectores</a></li>
+      <li><a href="#modalizacao">Grau de certeza</a></li>
+      <li><a href="#sintagma">Sintagma nominal</a></li>
+      <li><a href="#palavras">Formação de palavras</a></li>
+      <li><a href="#cognatos">Falsos cognatos</a></li>
+      <li><a href="#artigo">Estrutura do artigo</a></li>
+      <li><a href="#generos">Gêneros textuais</a></li>
+      <li><a href="#estrategia">Estratégia de prova</a></li>
+    </ol>
+  </aside>
+
+  <main>
+    <div class="intro">
+      <h1>Estudos: como ler um artigo acadêmico em inglês</h1>
+      <p>O conteúdo que mais aparece nas provas de suficiência em leitura, com um exercício interativo em cada tema. Todos os exemplos são fictícios, escritos no estilo de artigos acadêmicos.</p>
+    </div>
+
+    <!-- 1 ---------------------------------------------------------------->
+    <section class="st" id="detalhe">
+      <h2>Leitura de detalhe</h2>
+      <p class="why">Questões de Acordo/Desacordo e de afirmações I, II, III testam se uma paráfrase em português diz <b>exatamente</b> o que o texto diz. A paráfrase errada quase nunca inventa um assunto: ela troca <b>uma</b> palavra que muda o alcance da frase.</p>
+
+      <div class="lab">
+        <span class="lt">Régua dos quantificadores · clique numa palavra</span>
+        <div class="ruler" id="ruler" aria-label="Quantificadores de 0 a 100 por cento"></div>
+        <div class="fb" id="rulerFb">Escolha uma palavra para ver o sentido e um exemplo.</div>
+      </div>
+
+      <h3>Treino: A ou D?</h3>
+      <div class="lab">
+        <p class="en" style="margin:0">Of the 120 teachers invited, 84 agreed to take part, and most of them had over ten years of experience. Interviews were conducted with a subsample of 20 participants. Few respondents reported using the platform daily; nonetheless, the majority considered it useful, provided that training was offered.</p>
+        <div id="adList" class="ex"></div>
+        <div class="bar"><span id="adScore"></span><button class="btn small" type="button" id="adReset">Recomeçar</button></div>
+      </div>
+
+      <h3>Negação sem “not”</h3>
+      <div class="tbl"><table><thead><tr><th>Expressão</th><th>Significa</th></tr></thead><tbody>
+        <tr><td><i>fail to show / find</i></td><td>não conseguir mostrar / não encontrar</td></tr>
+        <tr><td><i>lack (of)</i></td><td>falta de, não ter</td></tr>
+        <tr><td><i>far from negligible</i></td><td>longe de ser desprezível = é <b>importante</b></td></tr>
+        <tr><td><i>little evidence</i></td><td>pouca ou nenhuma evidência</td></tr>
+        <tr><td><i>remains unclear / is yet to be established</i></td><td>ainda não se sabe / ainda não foi estabelecido</td></tr>
+        <tr><td><i>rather than / instead of</i></td><td>em vez de (nega o segundo termo)</td></tr>
+        <tr><td><i>hardly, barely, scarcely, seldom</i></td><td>mal, quase não, raramente</td></tr>
+        <tr><td><i>no longer / not yet</i></td><td>não mais / ainda não</td></tr>
+      </tbody></table></div>
+
+      <h3>O status da informação</h3>
+      <div class="tbl"><table><thead><tr><th>No texto</th><th>É</th><th>Paráfrase errada típica</th></tr></thead><tbody>
+        <tr><td><i>X was found / showed</i></td><td>resultado</td><td>—</td></tr>
+        <tr><td><i>X may / might / suggests</i></td><td>hipótese</td><td>apresenta como fato comprovado</td></tr>
+        <tr><td><i>if / provided that / unless X</i></td><td>condição</td><td>apresenta como algo que já acontece</td></tr>
+        <tr><td><i>Smith argues that X</i></td><td>opinião de Smith</td><td>atribui aos autores ou a outro autor</td></tr>
+        <tr><td><i>it is often claimed that X</i></td><td>crença de terceiros</td><td>apresenta como posição dos autores</td></tr>
+        <tr><td><i>the study did not measure X</i></td><td>limitação</td><td>diz que o estudo mediu ou estimou X</td></tr>
+      </tbody></table></div>
+      <p class="hint" style="margin-top:12px">Método: ache a frase de origem, sublinhe no item os números, quantificadores, quem, quando e o status, e confira um por um. Um único detalhe errado torna o item inteiro D. Sequências sem nenhum D são raras.</p>
+    </section>
+
+    <!-- 2 ---------------------------------------------------------------->
+    <section class="st" id="referencia">
+      <h2>Referência e pronomes</h2>
+      <p class="why">O antecedente nem sempre é o substantivo mais próximo. Use três testes: <b>número</b> (singular ou plural), <b>candidatos</b> (substantivos da mesma frase e da anterior) e <b>teste do verbo</b> (troque o pronome pelo candidato e leia com o verbo).</p>
+      <div class="lab">
+        <span class="lt">Clique em cada termo destacado e escolha o antecedente</span>
+        <p class="en" id="prText" style="margin:0"></p>
+        <div id="prAsk" class="hint">Comece por qualquer termo destacado.</div>
+        <div class="chips" id="prOpts"></div>
+        <div class="fb" id="prFb" hidden></div>
+        <div class="bar"><span id="prScore"></span><button class="btn small" type="button" id="prReset">Recomeçar</button></div>
+      </div>
+      <h3>Quadro de retomada</h3>
+      <div class="tbl"><table><thead><tr><th>Forma</th><th>Retoma</th><th>Pista</th></tr></thead><tbody>
+        <tr><td><i>it / its</i></td><td>singular: coisa, estudo, método</td><td><i>its</i> = seu/sua; <i>it's</i> = <i>it is</i></td></tr>
+        <tr><td><i>they / them / their</i></td><td>plural, inclusive autores</td><td>verbos de dizer (<i>reported, argued</i>) pedem pessoas</td></tr>
+        <tr><td><i>whose</i></td><td>o possuidor, logo antes</td><td><i>buildings whose roofs</i> = edifícios cujos telhados</td></tr>
+        <tr><td><i>, which</i></td><td>a coisa antes ou a <b>oração inteira</b></td><td><i>the sample was small, which limits…</i></td></tr>
+        <tr><td><i>the former / the latter</i></td><td>o primeiro / o último de dois</td><td>conte a ordem em que aparecem</td></tr>
+        <tr><td><i>such + substantivo</i></td><td>“esse tipo de…” já descrito</td><td><i>such arrangements</i></td></tr>
+        <tr><td><i>one / ones; do so</i></td><td>substantivo / ação já dita</td><td><i>the new one; those who wished to do so</i></td></tr>
+        <tr><td><i>respectively</i></td><td>liga duas listas na ordem</td><td><i>A and B scored 3 and 5, respectively</i></td></tr>
+      </tbody></table></div>
+    </section>
+
+    <!-- 3 ---------------------------------------------------------------->
+    <section class="st" id="verbos">
+      <h2>Tempos e vozes verbais</h2>
+      <p class="why">Duas perguntas resolvem quase tudo. <b>Voz:</b> há uma forma de <i>be</i> seguida de particípio? Então é passiva. <b>Tempo:</b> é dado pelo <b>primeiro</b> verbo da locução.</p>
+      <div class="lab">
+        <span class="lt">Decodificador de locução verbal</span>
+        <div class="dec">
+          <input id="vbIn" type="text" value="had been installed" aria-label="Locução verbal em inglês" autocomplete="off" spellcheck="false">
+          <button class="btn primary" type="button" id="vbGo">Analisar</button>
+        </div>
+        <div class="chips" id="vbEx"></div>
+        <div id="vbOut"></div>
+      </div>
+      <h3>Tabela de tempos</h3>
+      <div class="tbl"><table><thead><tr><th>Tempo</th><th>Ativa</th><th>Passiva</th><th>Passiva em português</th></tr></thead><tbody>
+        <tr><td>Presente simples</td><td><i>measures</i></td><td><i>is measured</i></td><td>é medido</td></tr>
+        <tr><td>Passado simples</td><td><i>measured</i></td><td><i>was measured</i></td><td>foi medido</td></tr>
+        <tr><td>Presente contínuo</td><td><i>is measuring</i></td><td><i>is being measured</i></td><td>está sendo medido</td></tr>
+        <tr><td>Passado contínuo</td><td><i>was measuring</i></td><td><i>was being measured</i></td><td>estava sendo medido</td></tr>
+        <tr><td>Presente perfeito</td><td><i>has measured</i></td><td><i>has been measured</i></td><td>foi / tem sido medido</td></tr>
+        <tr><td>Passado perfeito</td><td><i>had measured</i></td><td><i>had been measured</i></td><td>tinha sido medido</td></tr>
+        <tr><td>Futuro</td><td><i>will measure</i></td><td><i>will be measured</i></td><td>será medido</td></tr>
+        <tr><td>Modal</td><td><i>may measure</i></td><td><i>may be measured</i></td><td>pode ser medido</td></tr>
+        <tr><td>Modal perfeito</td><td><i>may have measured</i></td><td><i>may have been measured</i></td><td>pode ter sido medido</td></tr>
+      </tbody></table></div>
+      <details class="more"><summary>Passiva reduzida e particípios irregulares</summary>
+        <p><i>the data <b>collected</b> in 2020</i> = os dados <b>que foram coletados</b> (passiva sem <i>which were</i>). <i><b>Given</b> these limitations</i> = dadas essas limitações. <i><b>Having completed</b> the survey</i> = depois de terem completado.</p>
+        <p class="hint">Particípios irregulares comuns: been, done, found, given, grown, held, kept, known, led, made, meant, read, seen, set, shown, taken, thought, written, chosen, drawn, brought, sought, built, undergone, arisen.</p>
+      </details>
+    </section>
+
+    <!-- 4 ---------------------------------------------------------------->
+    <section class="st" id="conectores">
+      <h2>Conectores e relações lógicas</h2>
+      <p class="why">Quando a questão pergunta a relação estabelecida por um conector sublinhado, julgue <b>o conector em si</b>. Uma palavra comparativa ou causal por perto não muda o que ele significa.</p>
+      <div class="lab">
+        <span class="lt">Quiz: qual é a relação do termo marcado?</span>
+        <div class="qcard" id="cqText"></div>
+        <div class="opts" id="cqOpts"></div>
+        <div class="fb" id="cqFb" hidden></div>
+        <div class="bar"><span id="cqScore">0 de 0</span><button class="btn small primary" type="button" id="cqNext">Próxima</button></div>
+      </div>
+      <h3>Tabela por relação</h3>
+      <div class="tbl"><table><thead><tr><th>Relação</th><th>Conectores</th><th>Tradução</th></tr></thead><tbody id="cxTable"></tbody></table></div>
+      <p class="hint" style="margin-top:12px"><b>Concessão × contraste:</b> na concessão, uma ideia é admitida e a outra prevalece apesar dela (<i>although it is costly, it is effective</i>). No contraste, duas ideias ficam lado a lado (<i>group A improved, whereas group B did not</i>). Palavras com mais de um sentido: <i>while</i> (contraste, concessão ou tempo), <i>since</i> (causa ou tempo), <i>as</i> (causa, tempo ou comparação), <i>yet</i> (contraste ou “ainda”).</p>
+    </section>
+
+    <!-- 5 ---------------------------------------------------------------->
+    <section class="st" id="modalizacao">
+      <h2>Grau de certeza (modalização)</h2>
+      <p class="why">Modais, verbos e advérbios mostram o quanto o autor se compromete com o que afirma. Clique numa palavra para ver onde ela fica na escala.</p>
+      <div class="lab">
+        <div class="gauge"><div class="track"></div><div class="needle" id="gNeedle" style="left:50%"></div>
+          <span class="lbl" style="left:0">baixa certeza</span><span class="lbl" style="right:0">alta certeza</span></div>
+        <div class="chips" id="gChips"></div>
+        <div class="fb" id="gFb">Escolha uma palavra.</div>
+      </div>
+      <h3>Outras marcas</h3>
+      <div class="tbl"><table><thead><tr><th>Função</th><th>Exemplos</th></tr></thead><tbody>
+        <tr><td>Atenuar (hedging)</td><td><i>suggest, indicate, appear to, seem to, tend to, is likely to, possibly, perhaps, arguably, to some extent</i></td></tr>
+        <tr><td>Reforçar a certeza</td><td><i>clearly, undoubtedly, certainly, evidently, it is clear that, demonstrate</i></td></tr>
+        <tr><td>Distanciar-se (a ideia é de outros)</td><td><i>it is claimed / alleged / held / assumed that, allegedly, reportedly, supposedly, so-called</i></td></tr>
+        <tr><td>Conceder</td><td><i>admittedly, granted, of course, it is true that</i></td></tr>
+      </tbody></table></div>
+    </section>
+
+    <!-- 6 ---------------------------------------------------------------->
+    <section class="st" id="sintagma">
+      <h2>Sintagma nominal</h2>
+      <p class="why">Em inglês, os modificadores vêm <b>antes</b> do núcleo; em português, quase sempre <b>depois</b>. Ache o núcleo (o último substantivo antes de <i>of</i> ou do fim do trecho), traduza-o primeiro e acrescente os modificadores da direita para a esquerda. Palavra com <i>-ly</i> modifica o adjetivo seguinte.</p>
+      <div class="lab">
+        <span class="lt">Tradução passo a passo</span>
+        <div class="chips" id="npEx"></div>
+        <div class="np" id="npWords"></div>
+        <div class="pt" id="npPt"></div>
+        <div class="hint" id="npWhy"></div>
+        <div class="bar"><span id="npStep"></span><span style="display:flex;gap:6px"><button class="btn small" type="button" id="npBack">Voltar</button><button class="btn small primary" type="button" id="npNext">Próximo passo</button></span></div>
+      </div>
+    </section>
+
+    <!-- 7 ---------------------------------------------------------------->
+    <section class="st" id="palavras">
+      <h2>Formação de palavras</h2>
+      <p class="why">Prefixos e sufixos ajudam a adivinhar palavras desconhecidas. Clique para ver o sentido e exemplos.</p>
+      <div class="lab">
+        <div class="chips" id="afChips"></div>
+        <div class="fb" id="afFb">Escolha um prefixo ou sufixo.</div>
+      </div>
+    </section>
+
+    <!-- 8 ---------------------------------------------------------------->
+    <section class="st" id="cognatos">
+      <h2>Falsos cognatos de artigos</h2>
+      <p class="why">Palavras parecidas com o português, mas com outro sentido. Pense na tradução e clique no cartão para conferir.</p>
+      <div class="cards" id="fcCards"></div>
+    </section>
+
+    <!-- 9 ---------------------------------------------------------------->
+    <section class="st" id="artigo">
+      <h2>Estrutura do artigo</h2>
+      <p class="why">Saber o que cada seção costuma trazer acelera a localização das respostas. Clique numa parte do artigo.</p>
+      <div class="art">
+        <div class="paper" id="artParts" role="tablist" aria-label="Seções do artigo"></div>
+        <div class="panel" id="artPanel" role="tabpanel"></div>
+      </div>
+    </section>
+
+    <!-- 9b --------------------------------------------------------------->
+    <section class="st" id="generos">
+      <h2>Gêneros textuais</h2>
+      <p class="why">Gênero textual é o “tipo” de texto, reconhecido pelo <b>propósito</b> (relatar uma pesquisa, revisar a literatura, avaliar uma obra…), pela <b>estrutura</b> (as seções que tem) e pela <b>linguagem</b> (as expressões que se repetem). A prova costuma perguntar “o texto constitui um exemplar de…” e pôr como distratores gêneros vizinhos. Abra cada gênero para ver o que é, como é organizado e as pistas em inglês.</p>
+
+      <div class="gens" id="genList"></div>
+
+      <h3>Os pares que mais confundem</h3>
+      <div class="tbl"><table><thead><tr><th>Dúvida</th><th>Como decidir</th><th>Pista no texto</th></tr></thead><tbody>
+        <tr><td><b>Revisão × resenha</b></td><td>A revisão discute a literatura de um <b>tema</b>; a resenha avalia <b>uma obra</b>.</td><td><i>studies have shown, several authors</i> × <i>this book, the volume, chapter 4</i></td></tr>
+        <tr><td><b>Revisão × artigo empírico</b></td><td>A revisão usa dados de outros; o empírico produz os seus.</td><td><i>participants were recruited, n = 214, Table 1</i> só no empírico</td></tr>
+        <tr><td><b>Revisão × ensaio / artigo teórico</b></td><td>A revisão organiza o que existe; o ensaio defende uma ideia própria, usando a literatura só como apoio.</td><td>densidade de citações em todo parágrafo × <i>we argue, we contend, this paper proposes</i> dominando</td></tr>
+        <tr><td><b>Resumo × resenha</b></td><td>O resumo sintetiza de forma neutra; a resenha avalia e recomenda.</td><td><i>results indicate</i> × <i>the strongest chapter, readers will find</i></td></tr>
+        <tr><td><b>Resumo × artigo completo</b></td><td>O resumo é um parágrafo (ou poucos); o artigo tem seções, referências e dezenas de parágrafos.</td><td>se há <i>Introduction, Method…</i> e 20+ parágrafos, não é resumo</td></tr>
+        <tr><td><b>Editorial × artigo de opinião</b></td><td>O editorial fala em nome do periódico e apresenta a edição; a opinião é de um autor qualquer.</td><td><i>in this issue, this special issue, the editors</i></td></tr>
+        <tr><td><b>Relato de caso × artigo empírico</b></td><td>O relato descreve <b>um único caso</b> em detalhe; o empírico estuda uma amostra.</td><td><i>we report the case of, a 54-year-old patient</i></td></tr>
+      </tbody></table></div>
+      <p class="hint" style="margin-top:10px">Atenção ao inglês: <i>review</i> serve para <b>artigo de revisão</b> (<i>review article, literature review</i>) e para <b>resenha</b> (<i>book review</i>). Decida pelo objeto: a literatura de um tema ou uma obra específica?</p>
+
+      <h3>Descubra o gênero</h3>
+      <div class="lab">
+        <span class="lt">Responda às perguntas sobre o texto</span>
+        <div class="trail" id="dtTrail"></div>
+        <div id="dtBox"></div>
+      </div>
+
+      <h3>Treino: qual é o gênero?</h3>
+      <div class="lab">
+        <div class="hint">Trechos curtos e fictícios. Leia e escolha o gênero mais provável.</div>
+        <div class="qcard" id="gqText" style="font-size:17px"></div>
+        <div class="opts" id="gqOpts"></div>
+        <div class="fb" id="gqFb" hidden></div>
+        <div class="bar"><span id="gqScore">0 de 0</span><button class="btn small primary" type="button" id="gqNext">Próximo trecho</button></div>
+      </div>
+    </section>
+
+    <!-- 10 --------------------------------------------------------------->
+    <section class="st" id="estrategia">
+      <h2>Estratégia de prova</h2>
+      <p class="why">Uma ordem de trabalho que economiza tempo para as questões de detalhe, que são as que mais derrubam.</p>
+      <ol class="flow">
+        <li><div><b>Título, resumo e subtítulos</b><span>Dois ou três minutos dão o tema e o mapa do texto.</span></div></li>
+        <li><div><b>Leia as questões antes do texto inteiro</b><span>Elas indicam o parágrafo (§). Leia o texto sob demanda, na ordem das questões, que segue a ordem do texto.</span></div></li>
+        <li><div><b>Resolva primeiro o que é de gramática</b><span>Tempos verbais, sintagma, conector e modal se resolvem só com o trecho citado.</span></div></li>
+        <li><div><b>Reserve tempo para o detalhe</b><span>A/D, I-II-III e “NÃO”: confira item por item contra a frase de origem.</span></div></li>
+        <li><div><b>Elimine alternativas</b><span>Em questões de sequência, um item seguro já elimina várias opções.</span></div></li>
+        <li><div><b>Na dúvida entre duas</b><span>Volte ao texto e procure a palavra que separa uma da outra.</span></div></li>
+      </ol>
+      <p style="margin-top:20px"><a class="btn primary" href="./#simulados">Ir para os simulados</a></p>
+    </section>
+  </main>
+</div>
+
+<footer><div class="wrap">Material não oficial, de estudo. Os exemplos em inglês são fictícios, escritos no estilo de artigos acadêmicos.<p data-apoio hidden style="margin:8px 0 0"></p><p data-feedback hidden style="margin:6px 0 0"></p></div></footer>
+<script src="config.js"></script>
+
+<script>
+const $ = id => document.getElementById(id);
+const escH = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* 1. régua de quantificadores ------------------------------------------ */
+const QUANT = [
+  ['none / no', 0, 'nenhum', '<i>No participant withdrew.</i> = Nenhum participante desistiu.'],
+  ['hardly any', 4, 'quase nenhum', '<i>Hardly any schools had a policy.</i> = Quase nenhuma escola tinha uma política.'],
+  ['few', 12, 'poucos (tom negativo: “quase nenhum”)', '<i>Few studies have examined this.</i> = Poucos estudos examinaram isso: <b>falta pesquisa</b>.'],
+  ['a few', 24, 'alguns poucos (existe, ainda que pouco)', '<i>A few studies have examined this.</i> = Alguns estudos já examinaram isso.'],
+  ['some', 36, 'alguns, em parte', '<i>Some respondents disagreed.</i> = Alguns respondentes discordaram.'],
+  ['many', 55, 'muitos (não todos)', '<i>Many teachers reported fatigue.</i> = Muitos professores relataram cansaço.'],
+  ['most', 74, 'a maioria (mais da metade)', '<i>Most of the dropouts cited time.</i> = A maioria dos que desistiram, <b>não todos</b>.'],
+  ['almost all', 90, 'quase todos', '<i>Almost all sites complied.</i> = Quase todos os locais cumpriram.'],
+  ['all / every', 100, 'todos', '<i>All roofs were extensive.</i> = Todos os telhados eram extensivos.'],
+];
+(function(){
+  const r = $('ruler');
+  let h = '<div class="track"></div>' + [0,25,50,75,100].map(v=>`<span class="tick" style="left:${v}%">${v}%</span>`).join('');
+  QUANT.forEach(([w,v],i)=>{ const top = i%2 ? 46 : 0, stem = 90 - top - 26;
+    h += `<div class="pt" style="left:${v}%;top:${top}px"><button class="chip" type="button" data-q="${i}">${w}</button><span class="stem" style="height:${stem}px"></span></div>`; });
+  r.innerHTML = h;
+  r.addEventListener('click', e=>{ const b = e.target.closest('[data-q]'); if(!b) return;
+    r.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on', c===b));
+    const [w,v,s,ex] = QUANT[+b.dataset.q];
+    $('rulerFb').innerHTML = `<b>${w}</b> (≈${v}%): ${s}.<br>${ex}`; });
+})();
+
+/* 1b. treino A/D ---------------------------------------------------------- */
+const AD = [
+  ['Todos os participantes tinham mais de dez anos de experiência.', 'D', '<i>most of them</i> = a maioria, não todos. Quantificador absoluto no item é sinal de alerta.'],
+  ['Foram entrevistados 20 professores.', 'A', '<i>Interviews were conducted with a subsample of 20 participants.</i>'],
+  ['Muitos respondentes usavam a plataforma diariamente.', 'D', '<i>Few respondents</i> = poucos, quase nenhum. <i>Few</i> sem <i>a</i> tem tom negativo.'],
+  ['84 professores foram convidados a participar.', 'D', 'Foram convidados 120; 84 é o número dos que <b>aceitaram</b>. Número aplicado ao grupo errado.'],
+  ['A maioria considerou a plataforma útil, desde que houvesse treinamento.', 'A', '<i>the majority considered it useful, provided that training was offered</i>. A condição foi mantida no item.'],
+];
+function renderAD(){
+  $('adList').innerHTML = AD.map(([t],i)=>`<div class="item" id="ad${i}"><span>${i+1}. ${t}</span>
+    <div class="chips"><button class="chip" type="button" data-ad="${i}" data-v="A">A (acordo)</button><button class="chip" type="button" data-ad="${i}" data-v="D">D (desacordo)</button></div>
+    <div class="fb" hidden></div></div>`).join('');
+  $('adScore').textContent = '';
+}
+$('adList').addEventListener('click', e=>{
+  const b = e.target.closest('[data-ad]'); if(!b) return;
+  const i = +b.dataset.ad, box = $('ad'+i); if (box.dataset.done) return;
+  const [,ans,why] = AD[i], ok = b.dataset.v === ans; box.dataset.done = ok ? '1' : '0';
+  box.querySelectorAll('[data-ad]').forEach(c=>{ c.disabled = true; if (c.dataset.v===ans) c.classList.add('good'); else if (c===b) c.classList.add('bad'); });
+  const fb = box.querySelector('.fb'); fb.hidden = false; fb.className = 'fb ' + (ok?'ok':'no');
+  fb.innerHTML = (ok ? 'Certo. ' : `Resposta: ${ans}. `) + why;
+  const done = [...document.querySelectorAll('#adList .item')].filter(x=>x.dataset.done);
+  $('adScore').textContent = `${done.filter(x=>x.dataset.done==='1').length} de ${done.length} certas`;
+});
+$('adReset').addEventListener('click', renderAD); renderAD();
+
+/* 2. pronomes ------------------------------------------------------------- */
+// texto com marcadores: [[id|termo]] para pronomes e {{aN|trecho}} para antecedentes possíveis
+const PR_TXT = '{{a1|Lindqvist and Moreau (2019)}} compared two {{a2|feedback formats}}, {{a3|written comments}} and {{a4|recorded audio}}; since [[p1|the latter]] took longer to produce, [[p2|it]] was used only in the final cycle. [[p3|Their]] {{a5|participants}}, [[p4|whose]] {{a6|drafts}} were assessed twice, reported that the audio helped [[p5|them]] understand {{a7|the reasons behind each comment}}, [[p6|which]] {{a8|had rarely happened in earlier cycles}}.';
+const PR = {
+  p1:{ok:'a4', opts:['a3','a4','a2'], why:'<i>the latter</i> = o último de dois termos citados. A ordem é <i>written comments</i> (1º) e <i>recorded audio</i> (2º).'},
+  p2:{ok:'a4', opts:['a4','a3','a2'], why:'Singular, e o que “demorava mais para produzir” e “foi usado só no ciclo final” é o áudio, que acabou de ser retomado por <i>the latter</i>.'},
+  p3:{ok:'a1', opts:['a2','a1','a5'], why:'Possessivo plural no início da frase costuma retomar o sujeito da frase anterior: os participantes eram <b>dos autores</b>, Lindqvist and Moreau.'},
+  p4:{ok:'a5', opts:['a6','a5','a1'], why:'<i>whose</i> retoma o <b>possuidor</b>, o substantivo logo antes: “participantes <b>cujos</b> rascunhos”. <i>drafts</i> é a coisa possuída.'},
+  p5:{ok:'a5', opts:['a5','a6','a1'], why:'Teste do verbo: o áudio ajudou <b>os participantes</b> a entender. Rascunhos não “entendem”.'},
+  p6:{ok:'a8x', opts:['a7','a8x','a6'], why:'Com vírgula, <i>which</i> pode retomar a <b>ideia inteira</b>: o fato de os participantes entenderem as razões é que “raramente acontecia antes”.'},
+};
+const PR_LABEL = {a1:'Lindqvist and Moreau', a2:'two feedback formats', a3:'written comments', a4:'recorded audio', a5:'participants', a6:'drafts', a7:'the reasons behind each comment', a8x:'o fato de os participantes entenderem as razões (a oração anterior)'};
+let prCur = null, prDone = {};
+function renderPR(){
+  prCur = null; prDone = {};
+  $('prText').innerHTML = PR_TXT
+    .replace(/\[\[(\w+)\|([^\]]+)\]\]/g, (m,id,t)=>`<button type="button" class="pr" data-p="${id}">${t}</button>`)
+    .replace(/\{\{(\w+)\|([^}]+)\}\}/g, (m,id,t)=>`<span class="ant" data-a="${id}">${t}</span>`);
+  $('prOpts').innerHTML = ''; $('prFb').hidden = true; $('prAsk').textContent = 'Comece por qualquer termo destacado.'; $('prScore').textContent = '';
+}
+$('prText').addEventListener('click', e=>{
+  const b = e.target.closest('.pr'); if(!b) return;
+  prCur = b.dataset.p;
+  document.querySelectorAll('.pr').forEach(x=>x.classList.toggle('cur', x===b));
+  document.querySelectorAll('.ant').forEach(x=>x.classList.remove('show'));
+  $('prAsk').innerHTML = `A que se refere <b>${escH(b.textContent)}</b>?`;
+  $('prOpts').innerHTML = PR[prCur].opts.map(a=>`<button class="chip" type="button" data-o="${a}">${PR_LABEL[a]}</button>`).join('');
+  $('prFb').hidden = true;
+});
+$('prOpts').addEventListener('click', e=>{
+  const b = e.target.closest('[data-o]'); if(!b || !prCur) return;
+  const p = PR[prCur], ok = b.dataset.o === p.ok;
+  $('prOpts').querySelectorAll('[data-o]').forEach(c=>{ c.disabled = true; if (c.dataset.o===p.ok) c.classList.add('good'); else if (c===b) c.classList.add('bad'); });
+  const ant = document.querySelector(`.ant[data-a="${p.ok==='a8x'?'a8':p.ok}"]`);
+  if (ant) ant.classList.add('show');
+  $('prFb').hidden = false; $('prFb').className = 'fb ' + (ok?'ok':'no'); $('prFb').innerHTML = (ok?'Certo. ':'Não. ') + p.why;
+  if (!(prCur in prDone)) prDone[prCur] = ok;
+  document.querySelector(`.pr[data-p="${prCur}"]`).classList.add('done');
+  const n = Object.keys(prDone).length, c = Object.values(prDone).filter(Boolean).length;
+  $('prScore').textContent = `${c} de ${n} certas na primeira tentativa${n===6?' · todos os termos feitos':''}`;
+});
+$('prReset').addEventListener('click', renderPR); renderPR();
+
+/* 3. decodificador de verbos --------------------------------------------- */
+const BE = new Set(['be','am','is','are','was','were','been','being']);
+const HAVE = new Set(['has','have','had']);
+const MODAL = new Set(['can','could','may','might','must','shall','should','will','would']);
+const IRR_PART = new Set('been done found given grown held kept known led made meant put read seen set shown taken thought written chosen drawn brought sought built undergone arisen begun become broken come cut felt fallen forgotten got gotten gone heard hidden hit hurt laid left lost met paid proven run said sent shut sold spent spoken stood struck taught told understood won withdrawn worn'.split(' '));
+const IRR_PAST = new Set('found gave grew held kept knew led made meant put read saw set showed took thought wrote chose drew brought sought built underwent arose began became broke came cut felt fell forgot got went heard hid hit hurt laid left lost met paid ran said sent shut sold spent spoke stood struck taught told understood won withdrew wore was were did had'.split(' '));
+const isPart = w => IRR_PART.has(w) || /ed$/.test(w);
+function analisar(frase){
+  const toks = frase.toLowerCase().replace(/[^a-z' -]/g,' ').split(/\s+/).filter(Boolean).filter(w=>w!=='not' && w!=="n't");
+  if (!toks.length) return null;
+  const main = toks[toks.length-1], aux = toks.slice(0,-1), first = toks[0];
+  const passiva = toks.length >= 2 && BE.has(toks[toks.length-2]) && isPart(main) && main !== 'been';
+  const ing = /ing$/.test(main);
+  let tempo, pt;
+  const temHave = aux.some(w=>HAVE.has(w) || w==='have');
+  if (MODAL.has(first)){
+    if (first==='will' && aux.includes('have')) tempo = 'futuro perfeito';
+    else if (first==='will' || first==='shall') tempo = 'futuro';
+    else if (aux.includes('have')) tempo = 'modal perfeito (' + first + ' + have)';
+    else tempo = 'modal (' + first + ')';
+  } else if (first==='has' || first==='have') tempo = aux.includes('been') && ing ? 'presente perfeito contínuo' : 'presente perfeito';
+  else if (first==='had') tempo = aux.includes('been') && ing ? 'passado perfeito contínuo' : 'passado perfeito';
+  else if (['am','is','are'].includes(first)) tempo = (aux.includes('being') || (ing && !passiva)) ? 'presente contínuo' : 'presente simples';
+  else if (['was','were'].includes(first)) tempo = (aux.includes('being') || (ing && !passiva)) ? 'passado contínuo' : 'passado simples';
+  else if (toks.length===1) tempo = (/ed$/.test(main) || IRR_PAST.has(main)) ? 'passado simples' : 'presente simples';
+  else tempo = null;
+  return {toks, main, passiva, tempo, temHave};
+}
+const PT_MODEL = {
+  'presente simples': ['mede', 'é medido'], 'passado simples': ['mediu', 'foi medido'],
+  'presente contínuo': ['está medindo', 'está sendo medido'], 'passado contínuo': ['estava medindo', 'estava sendo medido'],
+  'presente perfeito': ['mediu / tem medido', 'foi / tem sido medido'], 'passado perfeito': ['tinha medido', 'tinha sido medido'],
+  'futuro': ['medirá', 'será medido'], 'futuro perfeito': ['terá medido', 'terá sido medido'],
+  'presente perfeito contínuo': ['tem medido / vem medindo', '—'], 'passado perfeito contínuo': ['vinha medindo', '—'],
+};
+function mostrarVerbo(){
+  const r = analisar($('vbIn').value);
+  if (!r || !r.tempo){ $('vbOut').innerHTML = '<div class="fb">Digite uma locução verbal, por exemplo <i>was measured</i> ou <i>may have been affected</i>.</div>'; return; }
+  const n = r.toks.length;
+  const toks = r.toks.map((w,i)=>{ const cls = i===n-1 ? 'main' : (BE.has(w) ? 'be' : 'aux'); return `<span class="tok ${cls}">${w}</span>`; }).join('');
+  const beAntes = n>=2 ? r.toks[n-2] : null;
+  const s1 = r.passiva
+    ? `Antes do verbo principal vem <b>${beAntes}</b>, uma forma de <i>be</i>, e <b>${r.main}</b> é particípio. Então a voz é <b>passiva</b>.`
+    : (n>=2 && BE.has(beAntes) && /ing$/.test(r.main)
+        ? `<b>${beAntes}</b> + <b>${r.main}</b> (-ing) é forma contínua, não passiva. Voz <b>ativa</b>.`
+        : `Não há forma de <i>be</i> seguida de particípio. Voz <b>ativa</b>.`);
+  const s2 = n===1
+    ? `Não há auxiliar: <b>${r.main}</b> sozinho está no ${r.tempo}${/ed$/.test(r.main)||IRR_PAST.has(r.main)?' (forma de passado)':' (forma de presente)'}.`
+    : `O primeiro verbo é <b>${r.toks[0]}</b>, que define o tempo: <b>${r.tempo}</b>.`;
+  const modelo = PT_MODEL[r.tempo];
+  const pt = modelo ? `Modelo em português: <i>${modelo[r.passiva?1:0]}</i>.` : (r.passiva ? 'Em português: modal + “ser” + particípio (ex.: <i>pode ter sido medido</i>).' : 'Em português: modal + infinitivo (ex.: <i>pode ter medido</i>).');
+  $('vbOut').innerHTML = `<div>${toks}</div><ol class="steps">
+    <li><span class="n">1</span><span>${s1}</span></li>
+    <li><span class="n">2</span><span>${s2}</span></li>
+    <li><span class="n">3</span><span>${pt}</span></li></ol>
+    <div class="result">Resultado: <b>${r.tempo}, voz ${r.passiva?'passiva':'ativa'}</b></div>
+    <div class="hint">Cores: <span class="tok aux">auxiliar</span><span class="tok be">forma de be</span><span class="tok main">verbo principal</span></div>`;
+}
+$('vbEx').innerHTML = ['is classified','had been installed','relied','has been shown','were being interviewed','may have been affected','had approved','will be measured','is increasing','should be interpreted']
+  .map(x=>`<button class="chip" type="button" data-v="${x}">${x}</button>`).join('');
+$('vbEx').addEventListener('click', e=>{ const b = e.target.closest('[data-v]'); if(!b) return; $('vbIn').value = b.dataset.v; mostrarVerbo(); });
+$('vbGo').addEventListener('click', mostrarVerbo);
+$('vbIn').addEventListener('keydown', e=>{ if (e.key==='Enter') mostrarVerbo(); });
+mostrarVerbo();
+
+/* 4. conectores ------------------------------------------------------------ */
+const REL = {
+  concessao:['Concessão','although, though, even though, albeit, despite, in spite of, notwithstanding, granted that, admittedly, even if','embora, apesar de, ainda que'],
+  contraste:['Contraste','but, however, yet, whereas, while, on the other hand, nonetheless, nevertheless, conversely, by contrast','mas, porém, enquanto que, no entanto'],
+  causa:['Causa','because, since, as, given that, due to, owing to, on account of, in view of','porque, já que, devido a'],
+  consequencia:['Consequência / conclusão','thus, therefore, hence, consequently, accordingly, so, as a result','assim, portanto, por isso'],
+  condicao:['Condição','if, unless, provided that, providing, as long as, in case, otherwise','se, a menos que, desde que'],
+  comparacao:['Comparação','as… as, than, likewise, similarly, in the same way, compared with','tão… quanto, do que, da mesma forma'],
+  adicao:['Adição','moreover, furthermore, in addition, besides, also, not only… but also','além disso, também'],
+  finalidade:['Finalidade','in order to, so as to, so that, to','a fim de, para que'],
+  esclarecimento:['Esclarecimento / exemplo','that is, i.e., in other words, namely, for example, such as','isto é, ou seja, por exemplo'],
+  tempo:['Tempo','when, while, after, before, until, once, as soon as, since','quando, enquanto, depois, desde'],
+};
+$('cxTable').innerHTML = Object.values(REL).map(([n,c,t])=>`<tr><td><b>${n}</b></td><td><i>${c}</i></td><td>${t}</td></tr>`).join('');
+const CQ = [
+  ['The effect was significant, <mark>albeit</mark> small.', 'concessao', '<i>albeit</i> = embora. Admite-se que o efeito é pequeno, e a ideia principal (é significativo) se mantém.'],
+  ['<mark>Provided that</mark> funding is renewed, the study will continue.', 'condicao', '<i>provided that</i> = desde que.'],
+  ['<mark>Given that</mark> the sample was small, the results should be interpreted with caution.', 'causa', '<i>given that</i> = dado que, já que.'],
+  ['Group A improved, <mark>whereas</mark> group B remained stable.', 'contraste', '<i>whereas</i> = enquanto que. Dois fatos lado a lado.'],
+  ['<mark>Since</mark> 2015, the programme has expanded to twelve cities.', 'tempo', '<i>since</i> + data = desde. Com uma oração de motivo, seria causa.'],
+  ['<mark>Since</mark> the data were incomplete, two schools were excluded.', 'causa', 'Aqui <i>since</i> introduz o motivo: já que.'],
+  ['Participants were interviewed <mark>while</mark> the intervention was running.', 'tempo', '<i>while</i> = enquanto, durante.'],
+  ['<mark>While</mark> the method is costly, it is widely regarded as the most accurate.', 'concessao', '<i>while</i> no início, admitindo algo = embora.'],
+  ['The scale was revised; <mark>thus</mark>, earlier scores are not directly comparable.', 'consequencia', '<i>thus</i> = assim, portanto.'],
+  ['Response rates were low; <mark>nonetheless</mark>, the sample was diverse.', 'contraste', '<i>nonetheless</i> = no entanto. Opõe a frase anterior.'],
+  ['The new rubric was <mark>as</mark> reliable <mark>as</mark> the original one.', 'comparacao', '<i>as… as</i> = tão… quanto.'],
+  ['<mark>Likewise</mark>, teachers in rural schools reported heavier workloads.', 'comparacao', '<i>likewise</i> = da mesma forma.'],
+  ['<mark>Moreover</mark>, the effect persisted after six months.', 'adicao', '<i>moreover</i> = além disso.'],
+  ['Data were anonymised <mark>so that</mark> no school could be identified.', 'finalidade', '<i>so that</i> = para que.'],
+  ['The instrument measures self-efficacy, <mark>that is</mark>, beliefs about one’s own ability.', 'esclarecimento', '<i>that is</i> = isto é.'],
+  ['<mark>Unless</mark> the sensors are recalibrated, readings will drift.', 'condicao', '<i>unless</i> = a menos que (condição negativa).'],
+  ['<mark>Despite</mark> its limitations, the study offers useful evidence.', 'concessao', '<i>despite</i> = apesar de.'],
+  ['<mark>As</mark> the survey was voluntary, some bias is likely.', 'causa', '<i>as</i> + motivo = como, já que.'],
+  ['Scores rose <mark>as</mark> the training progressed.', 'tempo', '<i>as</i> = à medida que.'],
+  ['<mark>Hence</mark> the need for longitudinal designs.', 'consequencia', '<i>hence</i> = daí, por isso.'],
+  ['The results were promising; <mark>however</mark>, the sample was small.', 'contraste', '<i>however</i> = porém.'],
+  ['<mark>Once</mark> consent was obtained, the interviews began.', 'tempo', '<i>once</i> = assim que, uma vez que (tempo).'],
+  ['<mark>Owing to</mark> technical problems, two sessions were cancelled.', 'causa', '<i>owing to</i> = devido a.'],
+  ['The model was simplified <mark>in order to</mark> reduce computation time.', 'finalidade', '<i>in order to</i> = a fim de.'],
+];
+let cqOrder = [], cqI = -1, cqOk = 0, cqN = 0, cqAnswered = false;
+function cqShuffle(){ cqOrder = CQ.map((_,i)=>i).sort(()=>Math.random()-.5); cqI = -1; }
+function cqNext(){
+  if (++cqI >= cqOrder.length) cqShuffle(), cqI = 0;
+  const [s] = CQ[cqOrder[cqI]]; cqAnswered = false;
+  $('cqText').innerHTML = s; $('cqFb').hidden = true;
+  $('cqOpts').innerHTML = Object.entries(REL).map(([k,[n]])=>`<button type="button" data-r="${k}">${n}</button>`).join('');
+}
+$('cqOpts').addEventListener('click', e=>{
+  const b = e.target.closest('[data-r]'); if(!b || cqAnswered) return;
+  cqAnswered = true; const [,ans,why] = CQ[cqOrder[cqI]], ok = b.dataset.r === ans;
+  cqN++; if (ok) cqOk++;
+  $('cqOpts').querySelectorAll('[data-r]').forEach(c=>{ if (c.dataset.r===ans) c.classList.add('good'); else if (c===b) c.classList.add('bad'); });
+  $('cqFb').hidden = false; $('cqFb').className = 'fb ' + (ok?'ok':'no'); $('cqFb').innerHTML = (ok?'Certo. ':`Resposta: ${REL[ans][0]}. `) + why;
+  $('cqScore').textContent = `${cqOk} de ${cqN}`;
+});
+$('cqNext').addEventListener('click', cqNext);
+cqShuffle(); cqNext();
+
+/* 5. medidor de certeza ---------------------------------------------------- */
+const GAUGE = [
+  ['might',14,'possibilidade fraca: “talvez possa”'],['could',24,'possibilidade: “poderia”'],['may',28,'possibilidade: “pode”'],
+  ['perhaps / possibly',18,'advérbios de atenuação'],['suggest / appear to',34,'verbos de atenuação: o dado “sugere”, não prova'],
+  ['is likely to',55,'provável'],['should',58,'expectativa ou recomendação, não certeza'],['would',50,'hipótese, condicional'],
+  ['clearly / undoubtedly',86,'reforço: o autor se compromete'],['will',90,'previsão categórica'],['must',93,'necessidade ou dedução forte'],['cannot',95,'impossibilidade: categórico'],
+];
+$('gChips').innerHTML = GAUGE.map(([w],i)=>`<button class="chip" type="button" data-g="${i}">${w}</button>`).join('');
+$('gChips').addEventListener('click', e=>{ const b = e.target.closest('[data-g]'); if(!b) return;
+  const [w,v,s] = GAUGE[+b.dataset.g];
+  $('gChips').querySelectorAll('.chip').forEach(c=>c.classList.toggle('on', c===b));
+  $('gNeedle').style.left = v + '%';
+  $('gFb').innerHTML = `<b>${w}</b>: ${s}. ${v>=80?'<b>Alta certeza.</b>':v>=45?'Certeza média.':'Baixa certeza.'}`; });
+
+/* 6. sintagma nominal ------------------------------------------------------ */
+const NP = [
+  {w:[['a','det'],['widely','adv'],['used','adj'],['assessment','subst. adj.'],['tool','núcleo']], head:4, steps:[
+    {lit:[4], pt:'uma <b>ferramenta</b>', why:'O núcleo é o último substantivo: <i>tool</i> = ferramenta. Comece por ele.'},
+    {lit:[3], pt:'uma ferramenta <b>de avaliação</b>', why:'Volte para a esquerda: <i>assessment</i> é substantivo usado como adjetivo e vira “de avaliação”.'},
+    {lit:[2], pt:'uma ferramenta de avaliação <b>usada</b>', why:'<i>used</i> é particípio usado como adjetivo: “usada”.'},
+    {lit:[1], pt:'uma ferramenta de avaliação <b>amplamente</b> usada', why:'<i>widely</i> termina em -ly: é advérbio e modifica <i>used</i>, não <i>tool</i>.'}]},
+  {w:[['an','det'],['independently','adv'],['verifiable','adj'],['record','núcleo'],['of','prep'],['the','det'],['original','adj'],['pipeline','núcleo 2']], head:3, steps:[
+    {lit:[3], pt:'um <b>registro</b>', why:'Divida no <i>of</i>. O núcleo da primeira parte é <i>record</i>.'},
+    {lit:[2], pt:'um registro <b>verificável</b>', why:'<i>verifiable</i> qualifica o registro.'},
+    {lit:[1], pt:'um registro verificável <b>de forma independente</b>', why:'<i>independently</i> (-ly) modifica <i>verifiable</i>: verificável de forma independente.'},
+    {lit:[4,5,7], pt:'um registro verificável de forma independente <b>do pipeline</b>', why:'<i>of the …</i> vira “do / da …” depois do primeiro bloco. Núcleo da segunda parte: <i>pipeline</i>.'},
+    {lit:[6], pt:'um registro verificável de forma independente do pipeline <b>original</b>', why:'<i>original</i> qualifica <i>pipeline</i>.'}]},
+  {w:[['the','det'],["participants'",'possessivo'],['self-reported','adj. composto'],['sleep','subst. adj.'],['quality','núcleo']], head:4, steps:[
+    {lit:[4], pt:'a <b>qualidade</b>', why:'Núcleo: <i>quality</i>.'},
+    {lit:[3], pt:'a qualidade <b>do sono</b>', why:'<i>sleep</i> é substantivo usado como adjetivo: “do sono”.'},
+    {lit:[2], pt:'a qualidade do sono <b>autorrelatada</b>', why:'<i>self-reported</i> é adjetivo composto: autorrelatada.'},
+    {lit:[1], pt:'a qualidade do sono autorrelatada <b>dos participantes</b>', why:"<i>participants'</i> (s + apóstrofo) = possessivo plural: dos participantes. O possessivo vai para o fim."}]},
+];
+let npI = 0, npS = 0;
+function renderNP(){
+  const ex = NP[npI], st = ex.steps;
+  const done = new Set(st.slice(0, npS).flatMap(s=>s.lit)), cur = new Set(npS>0 ? st[npS-1].lit : []);
+  $('npWords').innerHTML = ex.w.map(([w,c],i)=>`<span class="w${i===ex.head?' head':''}${cur.has(i)?' lit':done.has(i)?' done':''}"><span>${w}</span><small>${c}</small></span>`).join('');
+  $('npPt').innerHTML = npS ? st[npS-1].pt : '<span class="hint">Clique em “Próximo passo”.</span>';
+  $('npWhy').innerHTML = npS ? st[npS-1].why : 'O núcleo está com borda azul.';
+  $('npStep').textContent = `Passo ${npS} de ${st.length}`;
+  $('npBack').disabled = npS===0; $('npNext').disabled = npS===st.length;
+  $('npEx').querySelectorAll('.chip').forEach((c,i)=>c.classList.toggle('on', i===npI));
+}
+$('npEx').innerHTML = NP.map(x=>`<button class="chip" type="button">${x.w.map(w=>w[0]).join(' ')}</button>`).join('');
+$('npEx').addEventListener('click', e=>{ const b = e.target.closest('.chip'); if(!b) return; npI = [...$('npEx').children].indexOf(b); npS = 0; renderNP(); });
+$('npNext').addEventListener('click', ()=>{ npS++; renderNP(); });
+$('npBack').addEventListener('click', ()=>{ npS--; renderNP(); });
+renderNP();
+
+/* 7. afixos ----------------------------------------------------------------- */
+const AF = [
+  ['un- / in- / im- / ir- / il-','negação','unclear, inaccurate, impossible, irrelevant, illegal'],['non-','não','non-significant, non-native'],['dis-','negação, oposto','disagree, discontinue'],
+  ['mis-','errado','misinterpret, misleading'],['over- / under-','excesso / falta','overestimate, underreported'],['re-','de novo','reanalysis, reassess'],
+  ['pre- / post-','antes / depois','pre-test, post-intervention'],['inter- / intra-','entre / dentro','inter-rater, intra-group'],['semi-','metade, parcial','semi-structured, semi-arid'],
+  ['co- / counter-','junto / contra','co-author, counterpart, counterintuitive'],
+  ['-tion / -ment / -ness / -ity','forma substantivo','assessment, awareness, reliability'],['-al / -ive / -ous / -ic','forma adjetivo','empirical, effective, numerous, systemic'],
+  ['-able / -ible','que pode ser','measurable = mensurável'],['-less / -ful','sem / cheio de','meaningless = sem sentido; useful'],
+  ['-ize / -ify / -en','forma verbo','generalize, clarify, broaden'],['-ly','forma advérbio','significantly, largely'],
+];
+$('afChips').innerHTML = AF.map(([a],i)=>`<button class="chip" type="button" data-f="${i}">${a}</button>`).join('');
+$('afChips').addEventListener('click', e=>{ const b = e.target.closest('[data-f]'); if(!b) return; const [a,s,x] = AF[+b.dataset.f];
+  $('afChips').querySelectorAll('.chip').forEach(c=>c.classList.toggle('on', c===b));
+  $('afFb').innerHTML = `<b>${a}</b>: ${s}. Exemplos: <i>${x}</i>.`; });
+
+/* 8. falsos cognatos -------------------------------------------------------- */
+const FC = [
+  ['actually','na verdade','atualmente (= currently)'],['eventually','por fim, com o tempo','eventualmente (= occasionally)'],['assume','supor, pressupor','assumir um cargo'],
+  ['realize','perceber','realizar (= carry out)'],['pretend','fingir','pretender (= intend)'],['attend','frequentar, comparecer','atender (= assist)'],
+  ['support','apoiar, sustentar','suportar, tolerar'],['sensible','sensato','sensível (= sensitive)'],['consistent with','coerente, compatível com','consistente, firme'],
+  ['comprehensive','abrangente','compreensivo'],['evidence','provas, dados que sustentam','—'],['figure','número, valor; figura','só “figura”'],
+  ['outcome','resultado, desfecho','—'],['address (an issue)','tratar, abordar','endereçar'],['yield','produzir, gerar','—'],
+  ['lecture','aula expositiva, palestra','leitura (= reading)'],['college','faculdade','colégio (= school)'],['novel (adj.)','novo, inédito','romance (só como substantivo)'],
+  ['scholar','estudioso, pesquisador','escolar'],['prejudice','preconceito','prejuízo (= damage)'],['policy','política, diretriz','política partidária (= politics)'],
+];
+$('fcCards').innerHTML = FC.map(([w,y,n])=>`<button class="flip" type="button" aria-label="${w}: clique para ver o sentido"><div class="in">
+  <div class="f"><b>${w}</b><small>clique para virar</small></div>
+  <div class="b"><span class="y">✓ ${y}</span><span class="n">✗ ${n}</span></div></div></button>`).join('');
+$('fcCards').addEventListener('click', e=>{ const b = e.target.closest('.flip'); if(b) b.classList.toggle('on'); });
+
+/* 9. estrutura do artigo ---------------------------------------------------- */
+const ART = [
+  ['Abstract','1 parágrafo',['Objetivo, método, resultado e conclusão em resumo.'],['Tema (“com base no resumo…”)','Gênero textual']],
+  ['Introduction','§ iniciais',['Contexto e importância do tema.','Literatura: vários autores com ano.','Lacuna e objetivo do estudo.'],['Autoria (quem disse o quê)','Referência textual e pronominal','Conectores']],
+  ['Method','§ do meio',['Perguntas de pesquisa.','Amostra, com números.','Instrumentos, escalas e procedimentos.'],['A/D sobre o método','“NÃO faz parte das perguntas de pesquisa”','Dados numéricos','Tempos e vozes verbais (muita passiva)']],
+  ['Results','§ do meio',['Números, percentuais e testes (t, p).','Tabelas descritas no texto.'],['Associação de dados numéricos','A/D sobre resultados']],
+  ['Discussion','§ finais',['Interpretação dos resultados.','Comparação com outros estudos.','Muito hedging (may, suggest).'],['Modalização','Conectores (albeit, whereas…)','Referência pronominal']],
+  ['Limitations','penúltima seção',['Fraquezas do estudo.','O que falta pesquisar (future research).'],['“NÃO destaca a necessidade de futuras pesquisas”','Status da informação (condição × fato)']],
+  ['Conclusion','último §',['Tese final e implicações.'],['Síntese da conclusão']],
+];
+$('artParts').innerHTML = ART.map(([t,s],i)=>`<button type="button" role="tab" data-art="${i}">${t}<small>${s}</small></button>`).join('');
+function showArt(i){
+  const [t,,tem,qs] = ART[i];
+  $('artParts').querySelectorAll('button').forEach((b,j)=>{ b.classList.toggle('on', j===i); b.setAttribute('aria-selected', j===i); });
+  $('artPanel').innerHTML = `<h4>${t}</h4><div><b>O que costuma trazer</b><ul>${tem.map(x=>`<li>${x}</li>`).join('')}</ul></div><div><b>Questões que costumam sair daqui</b><ul>${qs.map(x=>`<li>${x}</li>`).join('')}</ul></div>`;
+}
+$('artParts').addEventListener('click', e=>{ const b = e.target.closest('[data-art]'); if(b) showArt(+b.dataset.art); });
+showArt(2);
+
+/* 9b. gêneros textuais ------------------------------------------------------ */
+const GEN = [
+  {k:'empirico', n:'Artigo empírico', aka:'também: artigo original, artigo de pesquisa, artigo experimental (research article)', curto:'relata uma pesquisa feita pelos próprios autores, com dados próprios',
+   oque:'Relata uma pesquisa que os autores realizaram: eles coletaram ou produziram os dados (questionários, experimentos, medições, entrevistas) e apresentam os resultados.',
+   obj:'Apresentar resultados novos e interpretá-los à luz da literatura.',
+   est:'Formato IMRaD: <b>Introduction</b> (contexto, literatura, objetivo), <b>Method</b> (participantes, instrumentos, procedimento), <b>Results</b> (números, testes, tabelas), <b>Discussion</b>; muitas vezes também <b>Limitations</b> e <b>Conclusion</b>.',
+   marcas:'<i>participants were recruited, a total of 214, data were collected, n = 87, p &lt; .05, Table 1 shows, the present study, our findings</i>',
+   var:'<b>Experimental</b>: manipula uma variável e sorteia os grupos (<i>randomly assigned, control group</i>). <b>Quase-experimental</b>: há grupos, mas sem sorteio. <b>Observacional / survey</b>: só observa ou aplica questionários. <b>Qualitativo</b>: entrevistas, observação. <b>Métodos mistos</b>: combina números e entrevistas.',
+   conf:'Não é revisão: a revisão cita resultados de outros estudos; o empírico produz os seus. A Introduction de um empírico também cita muita gente, então olhe se existe Method com amostra própria.'},
+  {k:'revisao', n:'Artigo de revisão', aka:'também: revisão de literatura (review article, literature review)', curto:'reúne, compara e avalia o que já foi publicado sobre um tema',
+   oque:'Reúne e discute o que já foi publicado sobre um tema: compara definições, abordagens e resultados de outros autores. Não coleta dados novos.',
+   obj:'Mapear o estado da questão, apontar consensos, contradições e lacunas e, muitas vezes, defender uma posição sobre a literatura.',
+   est:'Introdução (a necessidade do tema), seções temáticas (conceitos, definições, abordagens ou técnicas, cada uma com vantagens e limitações) e conclusão com uma síntese ou tese. A revisão sistemática tem também uma seção de busca (bases, critérios de inclusão).',
+   marcas:'<i>this review, the literature, several authors, studies have shown, X (2015) argues, Y (2019) proposes, it has been suggested</i>; citações (autor, ano) em praticamente todo parágrafo.',
+   var:'<b>Narrativa</b>: o autor escolhe e discute a literatura livremente. <b>Sistemática</b>: busca em bases com critérios explícitos (<i>we searched four databases; 37 studies met the inclusion criteria</i>). <b>Meta-análise</b>: combina estatisticamente os resultados de vários estudos (<i>pooled effect size</i>).',
+   conf:'Não é resenha (que avalia <b>uma</b> obra) nem ensaio (que defende uma ideia própria usando a literatura só como apoio). Se o texto compara o que muitos autores disseram, é revisão, mesmo que termine com uma posição.'},
+  {k:'ensaio', n:'Ensaio / artigo teórico', aka:'também: artigo de posição (position paper), artigo de opinião acadêmico', curto:'defende uma tese ou propõe um modelo por argumentação',
+   oque:'Desenvolve um argumento próprio: defende uma tese, critica um conceito ou propõe um modelo teórico, sem coleta de dados.',
+   obj:'Convencer o leitor de uma ideia nova ou de uma mudança de perspectiva.',
+   est:'Organizado por argumentos, não por estudos: apresentação da tese, argumentos e contra-argumentos, implicações.',
+   marcas:'<i>we argue, we contend, this paper proposes, it is our view that, we suggest that the notion of X should be abandoned</i>; menos citações e mais voz dos autores.',
+   var:'Pode se apoiar em exemplos, casos ilustrativos e na literatura, mas a literatura serve ao argumento.',
+   conf:'A diferença para a revisão é o que domina: comparar o que já existe (revisão) ou propor algo novo (ensaio). Na dúvida, conte as citações e veja se as seções são organizadas por autores e abordagens (revisão) ou por argumentos (ensaio).'},
+  {k:'resenha', n:'Resenha', aka:'também: resenha crítica (book review, review of …)', curto:'descreve e avalia uma obra específica',
+   oque:'Apresenta e avalia <b>uma</b> obra específica: um livro, uma coletânea, um software, às vezes um filme ou outro artigo.',
+   obj:'Informar o leitor sobre a obra e dar uma avaliação crítica: vale a pena ler?',
+   est:'Referência completa da obra no topo, resumo do conteúdo (capítulo a capítulo, às vezes), avaliação (pontos fortes e fracos) e recomendação.',
+   marcas:'<i>this book, this volume, the author, the editors, chapter 3, the second part, readers will find, I recommend, a welcome addition</i>',
+   var:'Pode ser descritiva (mais resumo) ou crítica (mais avaliação).',
+   conf:'Não é revisão: a resenha trata de uma obra só. Não é resumo: a resenha avalia, o resumo apenas sintetiza.'},
+  {k:'resumo', n:'Resumo (abstract)', aka:'também: resumo acadêmico, resumo expandido', curto:'texto curto que sintetiza outro trabalho, sem avaliá-lo',
+   oque:'Texto curto que condensa um trabalho: objetivo, método, principais resultados e conclusão.',
+   obj:'Permitir que o leitor decida se lê o trabalho completo. Por isso é neutro e não avalia.',
+   est:'O <b>abstract</b> tem um parágrafo de 150 a 300 palavras, no início do artigo; o <b>structured abstract</b> usa rótulos (<i>Background, Methods, Results, Conclusions</i>). O <b>resumo expandido</b>, comum em eventos, tem de 2 a 5 páginas, com um mini-IMRaD.',
+   marcas:'<i>This study investigates…, We examined…, Results indicate…, Findings suggest…, The paper concludes…</i>; geralmente sem citações e sem subtítulos.',
+   var:'Resumo simples, structured abstract e resumo expandido.',
+   conf:'Na prova, “resumo acadêmico” costuma ser distrator para o texto inteiro: se o texto tem seções, referências e dezenas de parágrafos, é um artigo que <b>tem</b> um resumo, e não um resumo.'},
+  {k:'editorial', n:'Editorial', aka:'também: nota editorial, introdução a número especial', curto:'texto do editor que apresenta a edição ou a posição do periódico',
+   oque:'Texto curto escrito pelo editor (ou pela equipe editorial) do periódico.',
+   obj:'Apresentar a edição ou um número especial, comentar um tema em pauta ou expor a posição da revista.',
+   est:'Poucas páginas, sem método; costuma citar os artigos da própria edição.',
+   marcas:'<i>In this issue, this special issue brings together, the contributions, we thank the reviewers, the editors</i>',
+   var:'Editorial de abertura de número especial; editorial de posicionamento.',
+   conf:'Difere do artigo de opinião porque fala em nome do periódico e da edição, e não de um autor qualquer.'},
+  {k:'caso', n:'Relato de caso / estudo de caso', aka:'também: case report, case study', curto:'descreve em detalhe um único caso',
+   oque:'Descreve em profundidade um caso único (um paciente, uma empresa, uma escola, um projeto) e o que ele ensina.',
+   obj:'Documentar algo raro, novo ou exemplar, ou explorar um fenômeno no seu contexto real.',
+   est:'Apresentação do caso, descrição cronológica, discussão das lições. O estudo de caso como pesquisa tem método (entrevistas, documentos).',
+   marcas:'<i>We report the case of, a 54-year-old patient, the company under study, over an 18-month period, the case illustrates</i>',
+   var:'Relato de caso clínico (mais descritivo); estudo de caso qualitativo (pesquisa, com método).',
+   conf:'O empírico estuda uma amostra; o relato de caso foca em um caso só.'},
+];
+$('genList').innerHTML = GEN.map(g=>`<details class="gen" id="g-${g.k}"><summary><b>${g.n}</b><i class="ar" aria-hidden="true">›</i><span>${g.curto}</span></summary>
+  <dl><dt>O que é</dt><dd>${g.oque}<div class="aka">${g.aka}</div></dd>
+  <dt>Objetivo</dt><dd>${g.obj}</dd>
+  <dt>Estrutura</dt><dd>${g.est}</dd>
+  <dt>Pistas em inglês</dt><dd>${g.marcas}</dd>
+  <dt>Variações</dt><dd>${g.var}</dd>
+  <dt>Não confundir</dt><dd>${g.conf}</dd></dl></details>`).join('');
+const GNOME = Object.fromEntries(GEN.map(g=>[g.k, g.n]));
+
+// árvore de decisão
+const DT = {
+  q1:{t:'O texto é um único parágrafo (ou poucos) que sintetiza um trabalho?', h:'Sem seções, sem referências; só objetivo, método, resultado e conclusão condensados.', s:'=resumo', n:'q2'},
+  q2:{t:'O texto descreve e avalia uma obra específica (um livro, uma coletânea, um software)?', h:'Pistas: this book, this volume, chapter 3, the author, readers will find.', s:'=resenha', n:'q3'},
+  q3:{t:'O texto fala em nome do periódico e apresenta a edição?', h:'Pistas: in this issue, this special issue, the contributions.', s:'=editorial', n:'q4'},
+  q4:{t:'Os autores coletaram ou produziram dados próprios?', h:'Há participantes, amostra, medições, uma seção Method com o que eles fizeram e Results com números.', s:'q5', n:'q6'},
+  q5:{t:'O estudo trata de um único caso descrito em profundidade?', h:'Um paciente, uma empresa, uma escola, um projeto.', s:'=caso', n:'=empirico'},
+  q6:{t:'O texto organiza e compara o que vários autores já publicaram, com citações em quase todo parágrafo?', h:'As seções são organizadas por conceitos, abordagens ou técnicas, citando autores e anos.', s:'=revisao', n:'=ensaio'},
+};
+let dtPath = [];
+function dtRender(node){
+  const trail = dtPath.map(([q,a])=>`<span>${a==='s'?'sim':'não'}: ${DT[q].t.replace(/\?$/,'').slice(0,46)}…</span>`).join('');
+  $('dtTrail').innerHTML = trail;
+  if (node.startsWith('=')){
+    const g = GEN.find(x=>x.k===node.slice(1));
+    $('dtBox').innerHTML = `<div class="dtres"><span class="hint">Provável gênero</span><b>${g.n}</b><span>${g.oque}</span>
+      <span class="hint">Pistas: ${g.marcas}</span>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px"><a class="btn small" href="#g-${g.k}" data-open="${g.k}">Ver detalhes</a><button class="btn small primary" type="button" id="dtAgain">Recomeçar</button></div></div>`;
+    return;
+  }
+  const q = DT[node];
+  $('dtBox').innerHTML = `<div class="dtq">${q.t}<small>${q.h}</small></div>
+    <div style="display:flex;gap:8px;margin-top:12px"><button class="btn primary" type="button" data-dt="s" data-q="${node}">Sim</button><button class="btn" type="button" data-dt="n" data-q="${node}">Não</button>
+    ${dtPath.length?'<button class="btn" type="button" id="dtBack">Voltar</button>':''}</div>`;
+}
+$('dtBox').addEventListener('click', e=>{
+  const b = e.target.closest('[data-dt]');
+  if (b){ const q = b.dataset.q, a = b.dataset.dt; dtPath.push([q,a]); return dtRender(DT[q][a]); }
+  if (e.target.id==='dtAgain'){ dtPath = []; return dtRender('q1'); }
+  if (e.target.id==='dtBack'){ const [q] = dtPath.pop(); return dtRender(q); }
+  const o = e.target.closest('[data-open]');
+  if (o){ const d = document.getElementById('g-'+o.dataset.open); if (d) d.open = true; }
+});
+dtRender('q1');
+
+// quiz de trechos
+const GQ = [
+  ['<i>In this issue, we bring together six contributions that examine assessment practices in higher education. We are grateful to the reviewers who…</i>', 'editorial', '<i>In this issue</i> e o agradecimento aos pareceristas: é o editor apresentando a edição.'],
+  ['<i>This volume, edited by K. Moreno, comprises twelve chapters organised in three parts. Although the second part is uneven, the book will be of value to anyone…</i>', 'resenha', 'Avalia uma obra (<i>this volume, the book</i>) e recomenda: resenha.'],
+  ['<i>A total of 214 nurses were recruited from four hospitals and randomly assigned to either the training group or a waiting-list control group…</i>', 'empirico', 'Amostra própria e sorteio dos grupos (<i>randomly assigned, control group</i>): artigo empírico, do tipo experimental.'],
+  ['<i>We searched four databases for studies published between 2010 and 2024. Of the 1,203 records screened, 37 met the inclusion criteria…</i>', 'revisao', 'Busca em bases com critérios de inclusão: revisão sistemática. Os “dados” são estudos de outros autores.'],
+  ['<i>This study investigates the effect of peer tutoring on reading comprehension among 312 adolescents. Results indicate a moderate improvement… These findings suggest…</i> (texto completo de um único parágrafo)', 'resumo', 'Um parágrafo que condensa objetivo, amostra, resultado e conclusão, sem avaliar: resumo (abstract).'],
+  ['<i>We report the case of a small family-owned bakery that adopted a cooperative ownership model over an 18-month period…</i>', 'caso', '<i>We report the case of</i> e um único objeto estudado em profundidade: relato de caso.'],
+  ['<i>In this paper we argue that the notion of “engagement” has become too broad to be useful and should be replaced by two narrower constructs…</i>', 'ensaio', '<i>we argue</i> e uma proposta própria (substituir um conceito), sem dados: ensaio ou artigo teórico.'],
+  ['<i>Since the 1990s, several authors have proposed definitions of resilience (Halvorsen, 1998; Okoro, 2004; Lindqvist, 2011). This section compares these definitions and the instruments derived from them…</i>', 'revisao', 'Compara o que vários autores já propuseram, com citações (autor, ano): revisão narrativa.'],
+  ['<i>Participants (n = 46) completed the questionnaire twice, before and after the workshop. Mean scores rose from 3.1 to 3.8 (t = 4.21, p &lt; .001)…</i>', 'empirico', 'Amostra, medição antes e depois e teste estatístico: dados próprios, artigo empírico.'],
+  ['<i>The strongest chapters are those on rural schools; the final chapter, by contrast, adds little to the existing literature. Readers looking for a practical guide may be disappointed…</i>', 'resenha', 'Avaliação de capítulos de uma obra e aviso aos leitores: resenha.'],
+];
+let gqOrder = [], gqI = -1, gqOk = 0, gqN = 0, gqDone = false;
+function gqShuffle(){ gqOrder = GQ.map((_,i)=>i).sort(()=>Math.random()-.5); gqI = -1; }
+function gqNext(){
+  if (++gqI >= gqOrder.length) gqShuffle(), gqI = 0;
+  gqDone = false; $('gqText').innerHTML = GQ[gqOrder[gqI]][0]; $('gqFb').hidden = true;
+  $('gqOpts').innerHTML = GEN.map(g=>`<button type="button" data-gk="${g.k}">${g.n}</button>`).join('');
+}
+$('gqOpts').addEventListener('click', e=>{
+  const b = e.target.closest('[data-gk]'); if (!b || gqDone) return;
+  gqDone = true; const [,ans,why] = GQ[gqOrder[gqI]], ok = b.dataset.gk === ans;
+  gqN++; if (ok) gqOk++;
+  $('gqOpts').querySelectorAll('[data-gk]').forEach(c=>{ if (c.dataset.gk===ans) c.classList.add('good'); else if (c===b) c.classList.add('bad'); });
+  $('gqFb').hidden = false; $('gqFb').className = 'fb ' + (ok?'ok':'no');
+  $('gqFb').innerHTML = (ok ? 'Certo. ' : `Resposta: ${GNOME[ans]}. `) + why;
+  $('gqScore').textContent = `${gqOk} de ${gqN}`;
+});
+$('gqNext').addEventListener('click', gqNext);
+gqShuffle(); gqNext();
+
+/* índice: destaca a seção visível ------------------------------------------ */
+const links = [...document.querySelectorAll('.toc a')];
+const tocBox = document.querySelector('.toc');
+const io = new IntersectionObserver(es=>{ es.forEach(e=>{ if (e.isIntersecting){
+  links.forEach(a=>a.classList.toggle('on', a.getAttribute('href')==='#'+e.target.id));
+  const on = links.find(a=>a.classList.contains('on'));
+  if (on && matchMedia('(max-width:900px)').matches) tocBox.scrollTo({left: on.offsetLeft - tocBox.clientWidth/2 + on.offsetWidth/2, behavior:'smooth'});
+} }); }, {rootMargin:'-30% 0px -60% 0px'});
+document.querySelectorAll('section.st').forEach(s=>io.observe(s));
+</script>
+</body>
+</html>

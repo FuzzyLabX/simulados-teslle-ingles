@@ -1,0 +1,66 @@
+/* Tokens: tema claro em :root; escuro pelo sistema (sem escolha salva) ou por data-theme="dark". */
+:root{
+  --bg:#eef1f4; --paper:#ffffff; --paper-2:#f6f8fa; --ink:#18212e; --muted:#5a6676; --line:#d6dde5;
+  --accent:#1d5b86; --accent-ink:#ffffff; --accent-soft:#e2edf6; --ok:#1d7548; --ok-soft:#e0f2e8;
+  --warn:#8a5a00; --warn-soft:#fbefd5; --bad:#b0352b; --bad-soft:#f8e3e0; --mark:#ffeeb0;
+  --shadow:0 1px 2px rgba(24,33,46,.06), 0 8px 24px rgba(24,33,46,.06);
+  --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --hh:60px; color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f141a; --paper:#161d26; --paper-2:#1b242f; --ink:#e3e8ee; --muted:#98a4b3; --line:#2a3542;
+  --accent:#7db4dc; --accent-ink:#0f141a; --accent-soft:#1b2c3b; --ok:#5fc290; --ok-soft:#14301f;
+  --warn:#e6b45a; --warn-soft:#352812; --bad:#ee7f73; --bad-soft:#3a1d1a; --mark:#4d4212;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25); color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#0f141a; --paper:#161d26; --paper-2:#1b242f; --ink:#e3e8ee; --muted:#98a4b3; --line:#2a3542;
+  --accent:#7db4dc; --accent-ink:#0f141a; --accent-soft:#1b2c3b; --ok:#5fc290; --ok-soft:#14301f;
+  --warn:#e6b45a; --warn-soft:#352812; --bad:#ee7f73; --bad-soft:#3a1d1a; --mark:#4d4212;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25); color-scheme:dark }
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+[hidden]{display:none!important}
+
+.top{position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:1px solid var(--line);
+  padding:10px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;min-height:var(--hh)}
+.brand{display:flex;align-items:center;gap:10px;min-width:0;text-decoration:none;color:inherit}
+.brand .mark{flex:none;width:30px;height:30px;border-radius:7px;background:var(--ink);color:var(--paper);
+  display:grid;place-items:center;font-family:var(--serif);font-size:21px;line-height:1}
+.brand b{font-weight:600;font-size:14.5px;letter-spacing:.01em;white-space:nowrap}
+.brand span{color:var(--muted);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.spacer{flex:1}
+.prog,.timer{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.timer{font-family:var(--mono)}
+.btn{border:1px solid var(--line);background:var(--paper);padding:7px 14px;border-radius:7px;font-weight:500;font-size:14px;
+  text-decoration:none;display:inline-flex;align-items:center;gap:6px;color:var(--ink);transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{filter:brightness(1.07)}
+.btn.big{padding:11px 20px;font-size:15px}
+.btn.small{padding:4px 10px;font-size:13px}
+.btn.danger{color:var(--bad)}
+.btn:disabled{opacity:.5;cursor:default}
+.icon-btn{border:1px solid var(--line);background:var(--paper);width:36px;height:36px;border-radius:8px;display:inline-grid;place-items:center;color:var(--ink)}
+.icon-btn:hover{border-color:var(--muted)}
+.icon-btn svg{width:18px;height:18px}
+.pill{display:inline-block;font-size:12px;padding:1px 8px;border-radius:99px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.pill.real{color:var(--accent);border-color:var(--accent)}
+.pill.ok{color:var(--ok);border-color:var(--ok);background:var(--ok-soft)}
+.pill.warn{color:var(--warn);border-color:var(--warn);background:var(--warn-soft)}
+.pill.bad{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.num{font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* celular: cabeçalho numa linha só (a marca § continua levando ao início) */
+@media (max-width:520px){
+  .top{flex-wrap:nowrap;gap:6px;padding:8px 12px;min-height:52px}
+  .brand b{display:none}
+  .icon-btn{width:38px;height:38px}
+}
